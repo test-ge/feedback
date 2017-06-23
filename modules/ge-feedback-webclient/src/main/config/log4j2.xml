@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+
+    <Appenders>
+
+        <Console name="console">
+            <PatternLayout pattern="[----] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+        </Console>
+
+        <RollingFile name="tech" fileName="@log.file.technical@" filePattern="@log.file.technical@-%d{MM-dd-yyyy}-%i.gz">
+            <PatternLayout pattern="[TECH] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="@log.max_size@" />
+            </Policies>
+            <DefaultRolloverStrategy max="@log.max_index@" />
+        </RollingFile>
+
+        <RollingFile name="func" fileName="@log.file.technical@" filePattern="@log.file.technical@-%d{MM-dd-yyyy}-%i.gz">
+            <PatternLayout pattern="[FUNC] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="@log.max_size@" />
+            </Policies>
+            <DefaultRolloverStrategy max="@log.max_index@" />
+        </RollingFile>
+
+        <RollingFile name="thirdParty" fileName="@log.file.thirdParty@" filePattern="@log.file.thirdParty@-%d{MM-dd-yyyy}-%i.gz">
+            <PatternLayout pattern="[LIBS] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="@log.max_size@" />
+            </Policies>
+            <DefaultRolloverStrategy max="@log.max_index@" />
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="org.springframework" level="@log.level_fwk@" additivity="false">
+            <AppenderRef ref="thirdParty" />
+        </Logger>
+
+        <Logger name="org.thymeleaf" level="@log.level_fwk@" additivity="false">
+            <AppenderRef ref="thirdParty" />
+        </Logger>
+
+        <Logger name="net.sf.appstatus" level="@log.level_fwk@" additivity="false">
+            <AppenderRef ref="thirdParty" />
+        </Logger>
+
+        <Logger name="fr.ge" level="@log.level_app@" additivity="false">
+            <AppenderRef ref="func" />
+        </Logger>
+
+        <Logger name="func" level="@log.level_app@" additivity="false">
+            <AppenderRef ref="func" />
+        </Logger>
+
+        <Logger name="tech" level="@log.level_app@" additivity="false">
+            <AppenderRef ref="tech" />
+        </Logger>
+
+        <Root level="@log.level@">
+            <AppenderRef ref="console" />
+        </Root>
+
+    </Loggers>
+
+</Configuration>

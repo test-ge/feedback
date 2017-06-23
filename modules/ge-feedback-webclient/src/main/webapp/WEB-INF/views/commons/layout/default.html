@@ -1,0 +1,128 @@
+<!--/*
+
+    Copyright SCN Guichet Entreprises, Capgemini and contributors (2014-2016)
+
+    This software is a computer program whose purpose is to maintain and
+    administrate standalone forms.
+
+    This software is governed by the CeCILL  license under French law and
+    abiding by the rules of distribution of free software.  You can  use,
+    modify and/ or redistribute the software under the terms of the CeCILL
+    license as circulated by CEA, CNRS and INRIA at the following URL
+    "http://www.cecill.info".
+
+    As a counterpart to the access to the source code and  rights to copy,
+    modify and redistribute granted by the license, users are provided only
+    with a limited warranty  and the software's author,  the holder of the
+    economic rights,  and the successive licensors  have only  limited
+    liability.
+
+    In this respect, the user's attention is drawn to the risks associated
+    with loading,  using,  modifying and/or developing or reproducing the
+    software by the user in light of its specific status of free software,
+    that may mean  that it is complicated to manipulate,  and  that  also
+    therefore means  that it is reserved for developers  and  experienced
+    professionals having in-depth computer knowledge. Users are therefore
+    encouraged to load and test the software's suitability as regards their
+    requirements in conditions enabling the security of their systems and/or
+    data to be ensured and,  more generally, to use and operate it in the
+    same conditions as regards security.
+
+    The fact that you are presently reading this means that you have had
+    knowledge of the CeCILL license and that you accept its terms.
+
+*/-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" xmlns:layout="http://layout.thymeleaf.org" lang="fr">
+<head>
+    <th:block th:replace="~{commons/layout/head}" />
+</head>
+<body>
+    <span class="ribbon" th:if="${@appProperties.environment}" th:text="${@appProperties.environment}">Environment</span>
+
+    <div class="page-wrap">
+        <nav class="navbar" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <button th:if="${session?.user != null}" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img th:src="@{/images/logo/republique-francaise.png}" />
+                        <img th:src="@{/images/logo/guichet-entreprises.png}" />
+                    </a>
+                </div>
+
+                <div class="infosPersoEntete" sec:authorize="isAuthenticated()">
+                    <div class="nom" sec:authentication="name">John Doe</div>
+                    <div class="linkLogout">
+                        <a href="#" th:href="@{/logout}" th:text="#{Logout}">Logout</a>
+                    </div>
+                </div>
+
+    <!--             <div class="infosPersoEntete" th:if="${user}">
+                    <div class="nom">
+                        <span th:text="${user.id}"></span>
+                    </div>
+                </div> -->
+
+                <div class="infosPersoEntete" th:switch="${session?.user != null}">
+                    <div th:case="${true}">
+                        <div class="nom">
+                            <span th:text="${session.user.lastname}"></span>
+                            <span th:text="${session.user.firstname}"></span>
+                        </div>
+                        <div class="linkMajInfo">
+                            <a th:href="@{/majInfosPerso}">
+                                <span th:remove="tag" th:text="#{Profile}"></span>
+                            </a>
+                        </div>
+                        <div class="linkLogout">
+                            <a href="#" th:href="@{/logout}">
+                                <span th:remove="tag" th:text="#{Disconnect}"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="navbarCollapse" th:replace="commons/layout/menu"></div>
+            </div>
+        </nav>
+
+        <div class="container" id="content" th:include="${globalContent} ?: _">
+            <div>
+                <div class="pull-right" th:include="${contextual} ?: _"></div>
+                <ol class="breadcrumb" th:include="${breadcrumbs} ?: _">
+                    <li>
+                        <a th:href="@{/}" th:text="#{Home}"></a>
+                    </li>
+                </ol>
+            </div>
+            <div id="alertsPlaceholder"></div>
+            <th:block th:replace="${mainContent} ?: _">
+            BODY PAGE GOES HERE !
+            </th:block>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <a th:href="@{${@appProperties.frontUrl} + '/qui-sommes-nous/'}" target="_blank" th:text="#{About us}"></a>
+                    <a th:href="@{${@appProperties.frontUrl} + '/mentions-legales/'}" target="_blank" th:text="#{Terms of Service}"></a>
+                    <a th:href="@{${@appProperties.frontUrl} + '/contactez-nous/'}" target="_blank" th:text="#{Contact us}"></a>
+                </div>
+                <div class="col-md-7">
+                    <img th:src="@{/images/logo/footer.jpg}" style="width: 100%"></img>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

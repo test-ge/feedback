@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="60px" height="60px" viewBox="0 0 100 100" class="loader">
+	<script type="text/ecmascript">
+	<![CDATA[
+		var outerPeriod = 3;
+		var innerPeriod = 3;
+
+		var outerCircleAnimation = [
+				{ attributeName: 'stroke-dashoffset', dur: outerPeriod * 1000, values: '0 ; 0 ; -251.2' },
+				{ attributeName: 'stroke-dasharray', dur: outerPeriod * 1000, values: '0 251.2 ; 251.2 0 ; 0 251.2' },
+				{ attributeName: 'transform', dur: outerPeriod * 500, values: '0 50 50 ; 360 50 50', type: 'rotate' }
+			];
+
+		var innerCircleAnimation = [
+				{ attributeName: 'stroke-dashoffset', dur: innerPeriod * 1000, values: '0 ; 0 ; -188.5' },
+				{ attributeName: 'stroke-dasharray', dur: innerPeriod * 1000, values: '0 188.5 ; 188.5 0 ; 0 188.5' },
+				{ attributeName: 'transform', dur: innerPeriod * 250, values: '360 50 50 ; 0 50 50', type: 'rotate' }
+			];
+
+		function animate(ts, animation, shape) {
+			var states = animation.values.split(';').map(function (elm) {
+				return elm.trim().split(' ').map(function (v) {
+					return parseFloat(v);
+				});
+			});
+
+			var segment = animation.dur / (states.length - 1);
+			var delta = ts % animation.dur;
+			var segmentIndex = Math.floor(delta / segment);
+			var ratio = (delta % segment) / segment;
+			var from = states[segmentIndex];
+			var to = states[segmentIndex + 1];
+
+			var lst = [];
+			for (var i = 0; i < from.length; i++) {
+				lst.push((to[i] - from[i]) * ratio + from[i]);
+			}
+
+			shape.setAttribute(animation.attributeName, animation.type ? animation.type + '(' + lst.join(' ') + ')' : lst.join(' '));
+		}
+
+		document.addEventListener('DOMContentLoaded', function (evt) {
+			var outerCircle = document.getElementById('outerCircle'),
+				innerCircle = document.getElementById('innerCircle');
+
+			function fn(ts) {
+				outerCircleAnimation.forEach(function (animation) {
+					animate(ts, animation, outerCircle);
+				});
+
+				innerCircleAnimation.forEach(function (animation) {
+					animate(ts, animation, innerCircle);
+				});
+
+				requestAnimationFrame(fn);
+			}
+
+			requestAnimationFrame(fn);
+		});
+	]]>
+	</script>
+    <circle id="outerCircle" cx="50" cy="50" r="40" stroke="#0092BC" fill="none" stroke-width="6" stroke-linecap="butt">
+    <!--
+        <animate attributeName="stroke-dasharray" dur="6s" repeatCount="indefinite" values="0 251.2; 251.2 0; 0 251.2" />
+        <animate attributeName="stroke-dashoffset" dur="6s" repeatCount="indefinite" values="0; 0; -251.2" />
+        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="3s" repeatCount="indefinite" />
+	-->
+    </circle>
+    <circle id="innerCircle" cx="50" cy="50" r="30" stroke="#E53138" fill="none" stroke-width="6" stroke-linecap="butt">
+    <!--
+        <animate attributeName="stroke-dashoffset" dur="4s" repeatCount="indefinite" values="0; 0; -188.5" />
+        <animate attributeName="stroke-dasharray" dur="4s" repeatCount="indefinite" values="0 188.5; 188.5 0; 0 188.5" />
+        <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="1s" repeatCount="indefinite" />
+	-->
+    </circle>
+</svg>

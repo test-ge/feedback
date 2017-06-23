@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright SCN Guichet Entreprises, Capgemini and contributors (2014-2016) 
+	This software is a computer program whose purpose is to maintain and administrate 
+	standalone forms. This software is governed by the CeCILL license under French 
+	law and abiding by the rules of distribution of free software. You can use, 
+	modify and/ or redistribute the software under the terms of the CeCILL license 
+	as circulated by CEA, CNRS and INRIA at the following URL "http://www.cecill.info". 
+	As a counterpart to the access to the source code and rights to copy, modify 
+	and redistribute granted by the license, users are provided only with a limited 
+	warranty and the software's author, the holder of the economic rights, and 
+	the successive licensors have only limited liability. In this respect, the 
+	user's attention is drawn to the risks associated with loading, using, modifying 
+	and/or developing or reproducing the software by the user in light of its 
+	specific status of free software, that may mean that it is complicated to 
+	manipulate, and that also therefore means that it is reserved for developers 
+	and experienced professionals having in-depth computer knowledge. Users are 
+	therefore encouraged to load and test the software's suitability as regards 
+	their requirements in conditions enabling the security of their systems and/or 
+	data to be ensured and, more generally, to use and operate it in the same 
+	conditions as regards security. The fact that you are presently reading this 
+	means that you have had knowledge of the CeCILL license and that you accept 
+	its terms. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.ge.markov.service.mapper.IQueueMessageMapper">
+
+    <resultMap id="queueMessageBeanMap" type="fr.ge.markov.service.bean.QueueMessageBean">
+        <result property="id" column="ID" />
+        <result property="queueCode" column="QUEUECODE" />
+        <result property="worker" column="WORKER" />
+        <result property="uid" column="UID" />
+        <result property="created" column="CREATED" />
+        <result property="updated" column="UPDATED" />
+    </resultMap>
+
+
+    <insert id="create" parameterType="fr.ge.markov.service.bean.QueueMessageBean">
+       <selectKey keyProperty="queue.id" statementType="PREPARED" resultType="long" order="BEFORE">select nextval('sq_queueMessage')</selectKey>
+        INSERT INTO queueMessage (
+            id,
+            created,
+            updated,
+            queueCode,
+            worker,
+            uid
+        ) VALUES (
+            #{queue.id},
+            #{queue.created},
+            #{queue.updated},
+            #{queue.queueCode},
+            #{queue.worker},
+            #{queue.uid}
+        )
+    </insert>
+    
+<!--     <insert id="saveOrUpdate" useGeneratedKeys="true" keyProperty="queue.id" keyColumn="ID" parameterType="fr.ge.markov.service.bean.QueueMessageBean">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            SELECT COUNT (*)
+            FROM queueMessage 
+            WHERE uid  = #{queue.uid}
+        </selectKey>
+        <if test="count > 0">
+            UPDATE queueMessage
+            SET updated   = #{queue.updated},
+	            queueCode = #{queue.queueCode},
+	            worker    = #{queue.worker}
+            WHERE id = #{queue.id}
+        </if>
+        <if test="count==0">
+         INSERT INTO queueMessage (
+            id,
+            created,
+            updated,
+            queueCode,
+            worker,
+            uid
+        ) VALUES (
+            NEXTVAL('sq_queueMessage'),
+            #{queue.created},
+            #{queue.updated},
+            #{queue.queueCode},
+            #{queue.worker},
+            #{queue.uid}
+        )
+        </if>
+    </insert> -->
+
+    <select id="findByStatus" statementType="PREPARED" resultMap="queueMessageBeanMap">
+        SELECT *
+        FROM queueMessage
+        WHERE queueCode = #{queueCode}
+        ORDER BY updated ASC limit 1
+    </select>
+
+    <select id="findAllQueueByStatus" statementType="PREPARED" resultType="hashmap" resultMap="queueMessageBeanMap">
+        SELECT *
+        FROM queueMessage
+        WHERE queueCode = #{queueCode}
+        ORDER BY updated ASC
+    </select>
+
+    <select id="findByUid" statementType="PREPARED" resultMap="queueMessageBeanMap">
+        SELECT *
+        FROM queueMessage
+        WHERE uid = #{uid}
+        ORDER BY updated ASC
+        LIMIT 1
+    </select>
+
+    <select id="findById" statementType="PREPARED" resultMap="queueMessageBeanMap">
+        SELECT *
+        FROM queueMessage
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByStatusAndWorker" statementType="PREPARED" resultMap="queueMessageBeanMap">
+        SELECT *
+        FROM queueMessage
+        WHERE queueCode = #{queueCode}
+            AND worker = #{worker}
+        ORDER BY updated ASC
+        LIMIT 1
+    </select>
+
+    <update id="update">
+        UPDATE queueMessage
+        SET updated = #{queue.updated},
+            queueCode = #{queue.queueCode},
+            worker = #{queue.worker}
+        WHERE id = #{queue.id}
+    </update>
+    
+    <update id="move">
+        UPDATE queueMessage 
+        SET updated = #{now},
+            queueCode = #{destQueueCode}
+        WHERE id = #{id}
+    </update>
+
+    <select id="totalEntries" resultType="fr.ge.markov.service.persistence.entity.QueueMessageSummaryEntity">
+        SELECT queueCode AS queueName, count(1) as totalEntries
+        FROM queueMessage
+        GROUP BY queueCode
+    </select>
+    
+    <sql id="fragmentSearch">
+        SELECT *
+        FROM queueMessage
+        <trim prefix="WHERE " prefixOverrides="AND |OR ">
+            <if test="filters.queueCode != null">
+                <choose>
+                    <when test="filters.queueCode.operator == &quot;:&quot;">
+                        AND queueCode = #{filters.queueCode.value}
+                    </when>
+                    <when test="filters.queueCode.operator == &quot;!&quot;">
+                        AND queueCode &lt;&gt; #{filters.queueCode.value}
+                    </when>
+                </choose>
+            </if>
+            <if test="filters.worker != null">
+                <choose>
+                    <when test="filters.worker.operator == &quot;:&quot;">
+                        <choose>
+                            <when test="filters.worker.value == null or filters.worker.value == ''">
+                                AND worker IS NULL
+                            </when>
+                            <otherwise>
+                                AND worker = #{filters.worker.value}
+                            </otherwise>
+                        </choose>
+                    </when>
+                    <when test="filters.worker.operator == &quot;!&quot;">
+                        <choose>
+                            <when test="filters.worker.value == null or filters.worker.value == ''">
+                                AND worker IS NOT NULL
+                            </when>
+                            <otherwise>
+                                AND worker &lt;&gt; #{filters.worker.value}
+                            </otherwise>
+                        </choose>
+                    </when>
+                </choose>
+            </if>
+        </trim>
+        <choose>
+	        <when test="filters.queueCode == null or filters.queueCode.value != 'AWAIT'">
+	             ORDER BY updated DESC
+	        </when>
+	        <otherwise>
+	             ORDER BY updated ASC
+	        </otherwise>
+        </choose>
+    </sql>
+
+    <select id="findAll" statementType="PREPARED" resultMap="queueMessageBeanMap">
+        <include refid="fragmentSearch" />
+    </select>
+
+    <select id="count" statementType="PREPARED" resultType="long">
+        SELECT COUNT(1)
+        FROM (
+            <include refid="fragmentSearch" />
+        ) m
+    </select>
+    
+    <delete id="deleteById">
+       delete from queueMessage where id = #{id}
+    </delete>
+          
+    <delete id="deleteByUid">
+       delete from queueMessage where uid = #{uid}
+    </delete>
+
+</mapper>

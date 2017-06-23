@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+
+    <Appenders>
+
+        <Console name="console">
+            <PatternLayout pattern="[----] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="org.thymeleaf" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="net.sf.appstatus" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="fr.ge" level="debug" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="func" level="debug" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="tech" level="debug" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Root level="warn">
+            <AppenderRef ref="console" />
+        </Root>
+
+    </Loggers>
+
+</Configuration>

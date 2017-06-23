@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright SCN Guichet Entreprises, Capgemini and contributors (2014-2016) 
+	This software is a computer program whose purpose is to maintain and administrate 
+	standalone forms. This software is governed by the CeCILL license under French 
+	law and abiding by the rules of distribution of free software. You can use, 
+	modify and/ or redistribute the software under the terms of the CeCILL license 
+	as circulated by CEA, CNRS and INRIA at the following URL "http://www.cecill.info". 
+	As a counterpart to the access to the source code and rights to copy, modify 
+	and redistribute granted by the license, users are provided only with a limited 
+	warranty and the software's author, the holder of the economic rights, and 
+	the successive licensors have only limited liability. In this respect, the 
+	user's attention is drawn to the risks associated with loading, using, modifying 
+	and/or developing or reproducing the software by the user in light of its 
+	specific status of free software, that may mean that it is complicated to 
+	manipulate, and that also therefore means that it is reserved for developers 
+	and experienced professionals having in-depth computer knowledge. Users are 
+	therefore encouraged to load and test the software's suitability as regards 
+	their requirements in conditions enabling the security of their systems and/or 
+	data to be ensured and, more generally, to use and operate it in the same 
+	conditions as regards security. The fact that you are presently reading this 
+	means that you have had knowledge of the CeCILL license and that you accept 
+	its terms. -->
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.ge.feedback</groupId>
+        <artifactId>ge-feedback-webservices</artifactId>
+        <version>3.3.0-SNAPSHOT</version>
+        <relativePath>../..</relativePath>
+    </parent>
+
+    <artifactId>ge-feedback-ws-server</artifactId>
+    <packaging>war</packaging>
+
+    <name>GE Markov Web Services Server</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>fr.ge.feedback</groupId>
+            <artifactId>ge-feedback-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>fr.ge.feedback</groupId>
+            <artifactId>ge-feedback-ws-contract</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>swagger-ui</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.appstatus</groupId>
+            <artifactId>appstatus-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.appstatus</groupId>
+            <artifactId>appstatus-services-inprocess</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-local</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>m2e</id>
+            <activation>
+                <property>
+                    <name>m2e.version</name>
+                </property>
+            </activation>
+            <properties>
+                <engine.user.type>ge</engine.user.type>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
