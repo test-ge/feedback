@@ -1,4 +1,4 @@
-CREATE TABLE feedBack (
+CREATE TABLE feedback (
      id         BIGINT      NOT NULL,
      comment    VARCHAR(255) NOT NULL,
      page       VARCHAR(255),
@@ -7,37 +7,32 @@ CREATE TABLE feedBack (
      updated    TIMESTAMP   NOT NULL
 );
 
-ALTER TABLE feedBack
-    ADD CONSTRAINT pk_feedBack
+ALTER TABLE feedback
+    ADD CONSTRAINT pk_feedback
     UNIQUE (id);
 
-CREATE SEQUENCE sq_feedBack
+CREATE SEQUENCE sq_feedback
     START 1
     MINVALUE 1
     CACHE 1;
 
-CREATE TABLE IF NOT EXISTS  tocken (
+CREATE TABLE IF NOT EXISTS  token (
     id              BIGINT      NOT NULL,
-    tocken          VARCHAR(50),
+    token          VARCHAR(50),
     ip              VARCHAR(50),
-    feedBack_id      BIGINT,
     created         TIMESTAMP   NOT NULL,
     updated         TIMESTAMP   NOT NULL
 );
 
 
-ALTER TABLE tocken
-    ADD CONSTRAINT pk_tocken
+ALTER TABLE token
+    ADD CONSTRAINT pk_token
     UNIQUE (id);
     
-CREATE SEQUENCE sq_tocken
+CREATE SEQUENCE sq_token
     START 1
     MINVALUE 1
     CACHE 1;
 
-ALTER TABLE tocken
-    ADD CONSTRAINT fk_tocken_feedBack
-    FOREIGN KEY (feedBack_id)
-    REFERENCES feedback(id) ON DELETE CASCADE;
 
 

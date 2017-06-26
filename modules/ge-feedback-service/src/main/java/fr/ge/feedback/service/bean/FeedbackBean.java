@@ -7,7 +7,7 @@ package fr.ge.feedback.service.bean;
  * @author bsadil
  *
  */
-public class FeedBackBean extends AbstractDatedBean<FeedBackBean> {
+public class FeedbackBean extends AbstractDatedBean<FeedbackBean> {
 
     /**
      * the comment of feedback
@@ -27,7 +27,7 @@ public class FeedBackBean extends AbstractDatedBean<FeedBackBean> {
     /**
      * 
      */
-    public FeedBackBean() {
+    public FeedbackBean() {
         super();
     }
 

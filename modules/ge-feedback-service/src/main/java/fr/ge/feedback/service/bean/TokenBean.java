@@ -7,12 +7,12 @@ package fr.ge.feedback.service.bean;
  * @author bsadil
  *
  */
-public class TockenBean extends AbstractDatedBean<TockenBean> {
+public class TokenBean extends AbstractDatedBean<TokenBean> {
 
     /**
      * 
      */
-    private String tocken;
+    private String token;
 
     /**
      * 
@@ -22,7 +22,7 @@ public class TockenBean extends AbstractDatedBean<TockenBean> {
     /**
      * 
      */
-    public TockenBean() {
+    public TokenBean() {
         super();
         // Nothing to do
     }
@@ -30,16 +30,16 @@ public class TockenBean extends AbstractDatedBean<TockenBean> {
     /**
      * @return the tocken
      */
-    public String getTocken() {
-        return tocken;
+    public String getToken() {
+        return token;
     }
 
     /**
      * @param tocken
      *            the tocken to set
      */
-    public void setTocken(String tocken) {
-        this.tocken = tocken;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     /**

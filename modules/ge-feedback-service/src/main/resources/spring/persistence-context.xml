@@ -54,17 +54,17 @@
         <property name="mapperLocations" value="classpath*:/mybatis/mappers/**/*.xml" />
     </bean>
 
-    <bean id="queueMessageMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="fr.ge.markov.service.mapper.IQueueMessageMapper" />
+    <bean id="feedbackMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="fr.ge.feedback.service.mapper.IFeedbackMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    <bean id="queueMessageFileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="fr.ge.markov.service.mapper.IQueueMessageFileMapper" />
+    <bean id="tokenMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="fr.ge.feedback.service.mapper.ITokenMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    <context:component-scan base-package="fr.ge.markov.service">
+    <context:component-scan base-package="fr.ge.feedback.service">
         <context:include-filter expression="org.springframework.stereotype.Service" type="annotation" />
     </context:component-scan>
 
