@@ -4,8 +4,10 @@
 package fr.ge.feedback.service.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import fr.ge.feedback.service.bean.FeedbackBean;
 
@@ -63,4 +65,23 @@ public interface IFeedbackMapper {
      */
     List<FeedbackBean> findByPage(@Param("page") String page);
 
+    /**
+     * Search for queue messages.
+     *
+     * @param filters
+     *            filters
+     * @param rowBounds
+     *            pagination
+     * @return queue messages list
+     */
+    List<FeedbackBean> findAll(@Param("filters") Map<String, Object> filters, RowBounds rowBounds);
+
+    /**
+     * Count queue messages.
+     *
+     * @param filters
+     *            filters
+     * @return total elements corresponding
+     */
+    long count(@Param("filters") Map<String, Object> filters);
 }

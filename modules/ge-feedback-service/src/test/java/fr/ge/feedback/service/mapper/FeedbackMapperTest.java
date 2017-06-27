@@ -85,7 +85,7 @@ import fr.ge.feedback.service.data.AbstractDbTest;
 /**
  * Tests {@link IssueMapper}.
  *
- * @author $Author: jpauchet $
+ * @author $Author: aBsibiss $
  * @version $Revision: 0 $
  */
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -32,5 +32,10 @@
         </constructor-arg>
     </bean>
 
+    <jaxrs:client id="feedbackRestService" address="${ws.feedback.url}" serviceClass="fr.ge.feedback.ws.v1.service.IFeedbackRestService">
+        <jaxrs:providers>
+            <ref bean="jaxbJsonProvider" />
+        </jaxrs:providers>
+    </jaxrs:client>
 
 </beans>

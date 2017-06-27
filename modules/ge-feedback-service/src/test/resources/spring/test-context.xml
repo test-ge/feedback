@@ -68,6 +68,8 @@
     </bean>
 
     <alias name="testSqlSessionFactory" alias="sqlSessionFactory" />
+    
+    <bean id="service" class="fr.ge.feedback.service.impl.FeedbackServiceImpl" />
 
     <import resource="classpath:spring/persistence-context.xml" />
 

@@ -33,23 +33,7 @@
     knowledge of the CeCILL license and that you accept its terms.
 
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:cxf="http://cxf.apache.org/core" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-                        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-                        http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
-
-
-    <util:properties id="appProperties" location="classpath:test.properties" />
-    <context:property-placeholder properties-ref="appProperties" />
-
-    <context:annotation-config />
-
-    <bean id="slf4jContextFilter" class="fr.ge.feedback.core.support.filter.LogContextFilter" />
-    <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper"/>
-    <bean id="engine" class="fr.ge.common.form.engine.Engine" />
-
-</beans>
+<dataset>
+    <feedback id="100" comment="the best page" page="auth.dev.guichet-entreprises.fr/form-forge/markov/monitoring" rate="good"  created="2017-01-31 09:42:01.000000000" updated="2017-02-31 09:42:01.000000000" />
+    <feedback id="101" comment="the worst page" page="auth.dev.guichet-entreprises.fr/form-forge/search" rate="bad"  created="2017-01-31 09:43:01.000000000" updated="2017-02-31 09:43:01.000000000" />
+</dataset>

@@ -36,8 +36,10 @@
     <bean id="engine" class="fr.ge.common.form.engine.Engine">
         <property name="engineProperties" ref="engineProperties" />
     </bean>
+    
+    <bean id="feedbackService" class="fr.ge.feedback.service.impl.FeedbackServiceImpl"/>
 
-    <context:component-scan base-package="fr.ge.markov.ws.server">
+    <context:component-scan base-package="fr.ge.feedback.ws.server">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
     </context:component-scan>
 

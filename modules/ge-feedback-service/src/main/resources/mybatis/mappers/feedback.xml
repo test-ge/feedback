@@ -87,11 +87,11 @@
         SELECT *
         FROM feedback
         <choose>
-            <when test="filters.updated.operator == &quot;ASC&quot;">
-                 ORDER BY updated ASC
+            <when test="filters.updated == null or filters.updated.operator != &quot;ASC&quot;">
+                 ORDER BY updated DESC
             </when>
             <otherwise>
-                 ORDER BY updated DESC
+                 ORDER BY updated ASC
             </otherwise>
         </choose>
     </sql>

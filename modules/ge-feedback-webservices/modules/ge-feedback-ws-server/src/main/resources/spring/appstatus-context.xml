@@ -61,7 +61,7 @@
     </bean>
 
     <aop:config proxy-target-class="false">
-        <aop:advisor advice-ref="appStatusInterceptor" pointcut="execution(public * fr.ge.markov.ws.server.*.service.impl..*.*(..))" />
+        <aop:advisor advice-ref="appStatusInterceptor" pointcut="execution(public * fr.ge.feedback.ws.server.*.service.impl..*.*(..))" />
     </aop:config>
 
 </beans>
