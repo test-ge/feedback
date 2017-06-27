@@ -114,7 +114,7 @@ public class FeedbackMapperTest extends AbstractDbTest {
         feedback.setPage("page1");
         feedback.setCreated(new Date());
         feedback.setUpdated(new Date());
-        feedback.setRate("bad");
+        feedback.setRate(1L);
 
         this.mapper.create(feedback);
     }
@@ -125,7 +125,7 @@ public class FeedbackMapperTest extends AbstractDbTest {
 
         feedback.setId(100L);
         feedback.setComment("very bad");
-        feedback.setRate("bad");
+        feedback.setRate(1L);
         feedback.setUpdated(new Date());
 
         this.mapper.update(feedback);

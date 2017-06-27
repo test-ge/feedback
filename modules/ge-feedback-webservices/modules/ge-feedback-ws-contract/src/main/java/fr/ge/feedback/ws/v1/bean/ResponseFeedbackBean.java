@@ -29,7 +29,7 @@ public class ResponseFeedbackBean extends AbstractResponseDatedBean {
     /**
      * the score of feedBack
      */
-    private String rate;
+    private Long rate;
 
     /**
      * 
@@ -71,7 +71,7 @@ public class ResponseFeedbackBean extends AbstractResponseDatedBean {
     /**
      * @return the score
      */
-    public String getRate() {
+    public Long getRate() {
         return rate;
     }
 
@@ -79,7 +79,7 @@ public class ResponseFeedbackBean extends AbstractResponseDatedBean {
      * @param score
      *            the score to set
      */
-    public void setRate(String rate) {
+    public void setRate(Long rate) {
         this.rate = rate;
     }
 

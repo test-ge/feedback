@@ -55,7 +55,7 @@ public class FeedbackServiceImplTest extends AbstractDbTest {
         feedback.setPage("page1");
         feedback.setCreated(new Date());
         feedback.setUpdated(new Date());
-        feedback.setRate("bad");
+        feedback.setRate(1L);
 
         this.service.create(feedback);
     }
@@ -66,7 +66,7 @@ public class FeedbackServiceImplTest extends AbstractDbTest {
 
         feedback.setId(100L);
         feedback.setComment("very bad");
-        feedback.setRate("bad");
+        feedback.setRate(1L);
         feedback.setUpdated(new Date());
 
         this.service.update(feedback);

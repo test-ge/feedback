@@ -38,7 +38,7 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
      * {@inheritDoc}
      */
     @Override
-    public Response createFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") String rate) {
+    public Response createFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") Long rate) {
         final FeedbackBean feedback = new FeedbackBean();
         feedback.setComment(comment);
         feedback.setPage(page);
@@ -55,7 +55,7 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
      * {@inheritDoc}
      */
     @Override
-    public Response updateFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") String rate,
+    public Response updateFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") Long rate,
             @ApiParam("id of feedback") Long id) {
 
         final FeedbackBean feedback = new FeedbackBean();

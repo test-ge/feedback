@@ -2,7 +2,7 @@ CREATE TABLE feedback (
      id         BIGINT      NOT NULL,
      comment    VARCHAR(255) NOT NULL,
      page       VARCHAR(255),
-     rate       CHAR(35),
+     rate       BIGINT      NOT NULL,
      created    TIMESTAMP   NOT NULL,
      updated    TIMESTAMP   NOT NULL
 );
@@ -18,7 +18,7 @@ CREATE SEQUENCE sq_feedback
 
 CREATE TABLE IF NOT EXISTS  token (
     id              BIGINT      NOT NULL,
-    token          VARCHAR(50),
+    token           VARCHAR(50),
     ip              VARCHAR(50),
     created         TIMESTAMP   NOT NULL,
     updated         TIMESTAMP   NOT NULL

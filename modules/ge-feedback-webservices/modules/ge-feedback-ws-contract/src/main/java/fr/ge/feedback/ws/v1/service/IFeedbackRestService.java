@@ -44,7 +44,7 @@ public interface IFeedbackRestService {
     @POST
     @Path("/create")
     @Consumes({ MediaType.APPLICATION_JSON })
-    Response createFeedBack(@QueryParam("comment") String comment, @QueryParam("page") String page, @QueryParam("rate") String rate);
+    Response createFeedBack(@QueryParam("comment") String comment, @QueryParam("page") String page, @QueryParam("rate") Long rate);
 
     /**
      * update a comment for specific page
@@ -60,7 +60,7 @@ public interface IFeedbackRestService {
     @PUT
     @Path("/update")
     @Consumes({ MediaType.APPLICATION_JSON })
-    Response updateFeedBack(@QueryParam("comment") String comment, @QueryParam("page") String page, @QueryParam("rate") String rate, @QueryParam("id") Long id);
+    Response updateFeedBack(@QueryParam("comment") String comment, @QueryParam("page") String page, @QueryParam("rate") Long rate, @QueryParam("id") Long id);
 
     /**
      * update a comment for specific page

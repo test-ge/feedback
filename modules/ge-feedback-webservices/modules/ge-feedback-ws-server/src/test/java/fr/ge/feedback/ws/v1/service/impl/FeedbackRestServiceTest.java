@@ -56,7 +56,7 @@ public class FeedbackRestServiceTest {
     @Test
     public void testCreate() {
         when(this.feedbackService.create(Mockito.any(FeedbackBean.class))).thenReturn(1L);
-        Response response = this.feedbackRestService.createFeedBack("comment", "/test/test1", "bad");
+        Response response = this.feedbackRestService.createFeedBack("comment", "/test/test1", 1L);
 
         assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
 
@@ -65,7 +65,7 @@ public class FeedbackRestServiceTest {
     @Test
     public void testUpdate() {
         when(this.feedbackService.update(Mockito.any(FeedbackBean.class))).thenReturn(1L);
-        Response response = this.feedbackRestService.updateFeedBack("comment", "/test/test1", "bad", 1L);
+        Response response = this.feedbackRestService.updateFeedBack("comment", "/test/test1", 5L, 1L);
 
         assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
 
@@ -87,7 +87,7 @@ public class FeedbackRestServiceTest {
         final ResponseFeedbackBean feedbackBean = new ResponseFeedbackBean();
         feedbackBean.setId(1L);
         feedbackBean.setCreated(now);
-        feedbackBean.setRate("bad");
+        feedbackBean.setRate(5L);
         feedbackBean.setUpdated(now);
         feedbackBean.setPage("/test/tes1");
 
