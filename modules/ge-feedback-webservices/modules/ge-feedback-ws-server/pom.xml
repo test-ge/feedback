@@ -34,7 +34,7 @@
     <artifactId>ge-feedback-ws-server</artifactId>
     <packaging>war</packaging>
 
-    <name>GE Markov Web Services Server</name>
+    <name>GE Feedback Web Services Server</name>
 
     <dependencies>
         <dependency>

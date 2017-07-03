@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.ge.feedback.core.bean.search.SearchQuery;
@@ -40,8 +41,8 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
     @Override
     public Response createFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") Long rate) {
         final FeedbackBean feedback = new FeedbackBean();
-        feedback.setComment(comment);
-        feedback.setPage(page);
+        feedback.setComment(StringUtils.substring(comment, 0, 254));
+        feedback.setPage(StringUtils.substring(page, 0, 254));
         feedback.setRate(rate);
         feedback.setCreated(new Date());
         feedback.setUpdated(new Date());
@@ -60,8 +61,8 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
 
         final FeedbackBean feedback = new FeedbackBean();
         feedback.setId(id);
-        feedback.setComment(comment);
-        feedback.setPage(page);
+        feedback.setComment(StringUtils.substring(comment, 0, 254));
+        feedback.setPage(StringUtils.substring(page, 0, 254));
         feedback.setRate(rate);
         feedback.setUpdated(new Date());
 

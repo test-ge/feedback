@@ -172,6 +172,34 @@ public final class SearchQuery {
     /**
      * Adds the filter.
      *
+     * @param filter
+     *            the filter
+     * @return the search query
+     */
+    public SearchQuery addFilter(final String filter) {
+        return this.addFilter(new SearchQueryFilter(filter));
+    }
+
+    /**
+     * Adds the filter.
+     *
+     * @param filter
+     *            the filter
+     * @return the search query
+     */
+    public SearchQuery addFilter(final SearchQueryFilter filter) {
+        if (null == this.filters) {
+            this.filters = new ArrayList<>();
+        }
+
+        this.filters.add(filter);
+
+        return this;
+    }
+
+    /**
+     * Adds the filter.
+     *
      * @param column
      *            the column
      * @param value

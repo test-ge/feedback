@@ -33,9 +33,6 @@
 
     <context:annotation-config />
 
-    <bean id="engine" class="fr.ge.common.form.engine.Engine">
-        <property name="engineProperties" ref="engineProperties" />
-    </bean>
     
     <bean id="feedbackService" class="fr.ge.feedback.service.impl.FeedbackServiceImpl"/>
 
@@ -48,6 +45,5 @@
     <import resource="appstatus-context.xml" />
     <import resource="ws-server-cxf-context.xml" />
     <import resource="classpath:spring/persistence-context.xml" />
-    <import resource="classpath*:spring/engine-context.xml" />
 
 </beans>
