@@ -1,113 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright SCN Guichet Entreprises, Capgemini and contributors (2014-2016) 
-	This software is a computer program whose purpose is to maintain and administrate 
-	standalone forms. This software is governed by the CeCILL license under French 
-	law and abiding by the rules of distribution of free software. You can use, 
-	modify and/ or redistribute the software under the terms of the CeCILL license 
-	as circulated by CEA, CNRS and INRIA at the following URL "http://www.cecill.info". 
-	As a counterpart to the access to the source code and rights to copy, modify 
-	and redistribute granted by the license, users are provided only with a limited 
-	warranty and the software's author, the holder of the economic rights, and 
-	the successive licensors have only limited liability. In this respect, the 
-	user's attention is drawn to the risks associated with loading, using, modifying 
-	and/or developing or reproducing the software by the user in light of its 
-	specific status of free software, that may mean that it is complicated to 
-	manipulate, and that also therefore means that it is reserved for developers 
-	and experienced professionals having in-depth computer knowledge. Users are 
-	therefore encouraged to load and test the software's suitability as regards 
-	their requirements in conditions enabling the security of their systems and/or 
-	data to be ensured and, more generally, to use and operate it in the same 
-	conditions as regards security. The fact that you are presently reading this 
-	means that you have had knowledge of the CeCILL license and that you accept 
-	its terms. -->
+    This software is a computer program whose purpose is to maintain and administrate 
+    standalone forms. This software is governed by the CeCILL license under French 
+    law and abiding by the rules of distribution of free software. You can use, 
+    modify and/ or redistribute the software under the terms of the CeCILL license 
+    as circulated by CEA, CNRS and INRIA at the following URL "http://www.cecill.info". 
+    As a counterpart to the access to the source code and rights to copy, modify 
+    and redistribute granted by the license, users are provided only with a limited 
+    warranty and the software's author, the holder of the economic rights, and 
+    the successive licensors have only limited liability. In this respect, the 
+    user's attention is drawn to the risks associated with loading, using, modifying 
+    and/or developing or reproducing the software by the user in light of its 
+    specific status of free software, that may mean that it is complicated to 
+    manipulate, and that also therefore means that it is reserved for developers 
+    and experienced professionals having in-depth computer knowledge. Users are 
+    therefore encouraged to load and test the software's suitability as regards 
+    their requirements in conditions enabling the security of their systems and/or 
+    data to be ensured and, more generally, to use and operate it in the same 
+    conditions as regards security. The fact that you are presently reading this 
+    means that you have had knowledge of the CeCILL license and that you accept 
+    its terms. -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fr.ge.feedback.service.mapper.IFeedbackMapper">
 
-	<resultMap id="feedbackBeanMap" type="fr.ge.feedback.service.bean.FeedbackBean">
-		<result property="id" column="ID" />
-		<result property="comment" column="COMMENT" />
-		<result property="page" column="PAGE" />
-		<result property="rate" column="RATE" />
-		<result property="created" column="CREATED" />
-		<result property="updated" column="UPDATED" />
-	</resultMap>
+    <resultMap id="feedbackBeanMap" type="fr.ge.feedback.service.bean.FeedbackBean">
+        <result property="id" column="ID" />
+        <result property="comment" column="COMMENT" />
+        <result property="page" column="PAGE" />
+        <result property="rate" column="RATE" />
+        <result property="created" column="CREATED" />
+        <result property="updated" column="UPDATED" />
+    </resultMap>
 
 
-	<insert id="create" parameterType="fr.ge.feedback.service.bean.FeedbackBean">
-		<selectKey keyProperty="feedback.id" statementType="PREPARED"
-			resultType="long" order="BEFORE">select nextval('sq_feedback')</selectKey>
-		INSERT INTO feedback (
-		id,
-		comment,
-		page,
-		rate,
-		created,
-		updated
-		) VALUES (
-		#{feedback.id},
-		#{feedback.comment},
-		#{feedback.page},
-		#{feedback.rate},
-		#{feedback.created},
-		#{feedback.updated}
-		)
-	</insert>
+    <insert id="create" parameterType="fr.ge.feedback.service.bean.FeedbackBean">
+        <selectKey keyProperty="feedback.id" statementType="PREPARED"
+            resultType="long" order="BEFORE">select nextval('sq_feedback')</selectKey>
+        INSERT INTO feedback (
+        id,
+        comment,
+        page,
+        rate,
+        created,
+        updated
+        ) VALUES (
+        #{feedback.id},
+        #{feedback.comment},
+        #{feedback.page},
+        #{feedback.rate},
+        #{feedback.created},
+        #{feedback.updated}
+        )
+    </insert>
 
-	<update id="update">
-		UPDATE feedback SET
-		comment = #{feedback.comment},
-		rate = #{feedback.rate},
-		updated = #{feedback.updated}
-		WHERE id =
-		#{feedback.id}
-	</update>
-
-
-	<delete id="deleteById">
-		delete from feedback where id = #{id}
-	</delete>
-
-	<delete id="deleteByPage">
-		delete from feedback where page = #{page}
-	</delete>
+    <update id="update">
+        UPDATE feedback SET
+        comment = #{feedback.comment},
+        rate = #{feedback.rate},
+        updated = #{feedback.updated}
+        WHERE id =
+        #{feedback.id}
+    </update>
 
 
-	<sql id="fragmentSearch">
-		SELECT *
-		FROM feedback
-		<choose>
-			<when
-				test="filters.updated == null or filters.updated.operator != &quot;ASC&quot;">
-				ORDER BY updated DESC
-			</when>
-			<otherwise>
-				ORDER BY updated ASC
-			</otherwise>
-		</choose>
-	</sql>
+    <delete id="deleteById">
+        delete from feedback where id = #{id}
+    </delete>
 
-	<select id="findAll" statementType="PREPARED" resultMap="feedbackBeanMap">
-		<include refid="fragmentSearch" />
-	</select>
+    <delete id="deleteByPage">
+        delete from feedback where page = #{page}
+    </delete>
 
-	<select id="count" statementType="PREPARED" resultType="long">
-		SELECT COUNT(1)
-		FROM (
-		<include refid="fragmentSearch" />
-		) m
-	</select>
 
-	<select id="findByPage" statementType="PREPARED" resultMap="feedbackBeanMap">
-		SELECT *
-		FROM feedback
-		WHERE page = #{page}
-		ORDER BY updated ASC
-	</select>
+    <sql id="fragmentSearch">
+        SELECT *
+        FROM feedback
+        <choose>
+            <when
+                test="filters.updated == null or filters.updated.operator != &quot;ASC&quot;">
+                ORDER BY updated DESC
+            </when>
+            <otherwise>
+                ORDER BY updated ASC
+            </otherwise>
+        </choose>
+    </sql>
 
-	<select id="findById" statementType="PREPARED" resultMap="feedbackBeanMap">
-		SELECT
-		*
-		FROM feedback
-		WHERE id = #{id}
-	</select>
+    <select id="findAll" statementType="PREPARED" resultMap="feedbackBeanMap">
+        <include refid="fragmentSearch" />
+    </select>
+
+    <select id="count" statementType="PREPARED" resultType="long">
+        SELECT COUNT(1)
+        FROM (
+        <include refid="fragmentSearch" />
+        ) m
+    </select>
+
+    <select id="findByPage" statementType="PREPARED" resultMap="feedbackBeanMap">
+        SELECT *
+        FROM feedback
+        WHERE page = #{page}
+        ORDER BY updated ASC
+    </select>
+
+    <select id="findById" statementType="PREPARED" resultMap="feedbackBeanMap">
+        SELECT
+        *
+        FROM feedback
+        WHERE id = #{id}
+    </select>
 </mapper>

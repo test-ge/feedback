@@ -12,7 +12,7 @@ public class TokenBean extends AbstractDatedBean<TokenBean> {
     /**
      * 
      */
-    private String token;
+    private String tocken;
 
     /**
      * 
@@ -30,16 +30,16 @@ public class TokenBean extends AbstractDatedBean<TokenBean> {
     /**
      * @return the tocken
      */
-    public String getToken() {
-        return token;
+    public String getTocken() {
+        return tocken;
     }
 
     /**
      * @param tocken
      *            the tocken to set
      */
-    public void setToken(String token) {
-        this.token = token;
+    public void setTocken(String tocken) {
+        this.tocken = tocken;
     }
 
     /**
