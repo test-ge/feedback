@@ -7,7 +7,7 @@ package fr.ge.feedback.service.bean;
  * @author bsadil
  *
  */
-public class TockenBean extends AbstractDatedBean<TockenBean> {
+public class TokenBean extends AbstractDatedBean<TokenBean> {
 
     /**
      * 
@@ -22,7 +22,7 @@ public class TockenBean extends AbstractDatedBean<TockenBean> {
     /**
      * 
      */
-    public TockenBean() {
+    public TokenBean() {
         super();
         // Nothing to do
     }

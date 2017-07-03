@@ -7,7 +7,7 @@ package fr.ge.feedback.service.bean;
  * @author bsadil
  *
  */
-public class FeedBackBean extends AbstractDatedBean<FeedBackBean> {
+public class FeedbackBean extends AbstractDatedBean<FeedbackBean> {
 
     /**
      * the comment of feedback
@@ -22,12 +22,12 @@ public class FeedBackBean extends AbstractDatedBean<FeedBackBean> {
     /**
      * the score of feedBack
      */
-    private String rate;
+    private Long rate;
 
     /**
      * 
      */
-    public FeedBackBean() {
+    public FeedbackBean() {
         super();
     }
 
@@ -64,7 +64,7 @@ public class FeedBackBean extends AbstractDatedBean<FeedBackBean> {
     /**
      * @return the score
      */
-    public String getRate() {
+    public Long getRate() {
         return rate;
     }
 
@@ -72,7 +72,7 @@ public class FeedBackBean extends AbstractDatedBean<FeedBackBean> {
      * @param score
      *            the score to set
      */
-    public void setRate(String rate) {
+    public void setRate(Long rate) {
         this.rate = rate;
     }
 

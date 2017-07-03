@@ -41,30 +41,30 @@
 
     <jee:jndi-lookup id="dataSource" jndi-name="${jndi.db.datasource}" expected-type="javax.sql.DataSource" />
 
-<!-- 
+
     <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
         <property name="dataSource" ref="dataSource" />
         <property name="locations" value="classpath:ddl" />
-    </bean> -->
+    </bean>
 
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:/mybatis/mapper-config.xml" />
         <property name="mapperLocations" value="classpath*:/mybatis/mappers/**/*.xml" />
     </bean>
 
-    <bean id="queueMessageMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="fr.ge.markov.service.mapper.IQueueMessageMapper" />
+    <bean id="feedbackMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="fr.ge.feedback.service.mapper.IFeedbackMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    <bean id="queueMessageFileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="fr.ge.markov.service.mapper.IQueueMessageFileMapper" />
+    <bean id="tokenMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="fr.ge.feedback.service.mapper.ITokenMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    <context:component-scan base-package="fr.ge.markov.service">
+    <context:component-scan base-package="fr.ge.feedback.service">
         <context:include-filter expression="org.springframework.stereotype.Service" type="annotation" />
     </context:component-scan>
 

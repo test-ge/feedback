@@ -34,7 +34,6 @@
 
 -->
 <dataset>
-    <queueMessage id="100" queueCode="AWAIT" worker="1" uid="2017-01-ANA-RJL-50"  created="2017-01-31 09:42:01.000000000" updated="2017-02-31 09:42:01.000000000" />
-    <queueMessage id="101" queueCode="AWAIT" worker="1"  uid="2017-01-ANA-RJL-51" created="2017-01-31 09:42:01.000000000" updated="2017-03-31 09:42:01.000000000" />
-    <queueMessageFile />
-</dataset>
+    <feedback id="100" comment="the best page" page="auth.dev.guichet-entreprises.fr/form-forge/markov/monitoring" rate="5"  created="2017-01-31 09:42:01.000000000" updated="2017-02-31 09:42:01.000000000" />
+    <feedback id="101" comment="the worst page" page="auth.dev.guichet-entreprises.fr/form-forge/search" rate="1"  created="2017-01-31 09:43:01.000000000" updated="2017-02-31 09:43:01.000000000" />
+</dataset>

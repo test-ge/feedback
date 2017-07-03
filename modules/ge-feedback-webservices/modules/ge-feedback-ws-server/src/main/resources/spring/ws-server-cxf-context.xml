@@ -50,13 +50,10 @@
 <!--         </cxf:features> -->
 <!--     </cxf:bus> -->
 
-
-
+   <bean id="feedbackRest" class="fr.ge.feedback.ws.v1.service.impl.FeedbackRestServiceImpl"/>
     <jaxrs:server id="restServer" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="formsRestService" />
-            <ref bean="monitoringRestService" />
-            <ref bean="queueMessageRestService" />
+            <ref bean ="feedbackRest" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter" />
@@ -64,7 +61,7 @@
         </jaxrs:providers>
         <jaxrs:features>
             <bean class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-                <property name="title" value="GE Markov REST Server" />
+                <property name="title" value="GE Feedback REST Server" />
                 <property name="description" value="" />
                 <property name="contact" value="Team R&amp;D GE" />
                 <property name="prettyPrint" value="true" />

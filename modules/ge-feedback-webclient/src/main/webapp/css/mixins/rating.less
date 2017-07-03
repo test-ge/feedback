@@ -1,0 +1,21 @@
+.rating {
+
+    color: #d2d2d2;
+
+    .rate(5);
+}
+
+
+.rate-child(@counter) when (@counter > 0) {
+    .rate-child((@counter - 1));
+    &:nth-child(@{counter}) {
+        color: #EDB867;
+    }
+}
+ 
+.rate(@counter) when (@counter > 0) {
+    .rate((@counter - 1));
+    .rate-@{counter} {
+        .rate-child(@counter);
+    }
+}

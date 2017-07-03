@@ -48,7 +48,7 @@
 
     <context:annotation-config />
 
-    <bean id="slf4jContextFilter" class="fr.ge.markov.core.support.filter.LogContextFilter" />
+    <bean id="slf4jContextFilter" class="fr.ge.feedback.core.support.filter.LogContextFilter" />
     <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper"/>
     <bean id="engine" class="fr.ge.common.form.engine.Engine" />
 
