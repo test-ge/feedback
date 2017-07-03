@@ -39,11 +39,12 @@
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-
+    <import resource="classpath*:spring/ge-feedback-ws-context.xml" />
     <util:properties id="appProperties" location="classpath:test.properties" />
     <context:property-placeholder properties-ref="appProperties" />
 
     <import resource="classpath:spring/log-filter-context.xml" />
     <import resource="classpath:spring/dispatcher-context.xml" />
+    
 
 </beans>

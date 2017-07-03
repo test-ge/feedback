@@ -39,7 +39,6 @@
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <util:properties id="appProperties" location="classpath:test.properties" />
-    <util:properties id="engineProperties" location="classpath:test-engine.properties" ignore-resource-not-found="true" />
 
     <context:property-placeholder properties-ref="appProperties" />
 
@@ -50,7 +49,6 @@
         <property name="password" value="" />
     </bean>
 
-    <bean id="engine" class="fr.ge.common.form.engine.Engine" />
 
     <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper" />
 
