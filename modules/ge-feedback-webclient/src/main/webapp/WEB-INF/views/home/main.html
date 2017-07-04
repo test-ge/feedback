@@ -46,11 +46,15 @@
             <span class="rate-{{rate}}"><i class="fa fa-star"></i></span>
         </div>
     </script>
+    <script id="tpl-toolbar" type="text/x-handlebars-template">
+        <a th:href="@{/feedback/display?id={{id}}}" role="remove" data-code="{{code}}" th:title="#{Display}"><i class="fa fa-eye"></i></a>
+    </script>
 </th:block>
 </head>
 <body>
     <ol th:fragment="breadcrumbs">
         <li><a th:href="@{/}" th:text="#{Home}"></a></li>
+         
     </ol>
     <div th:fragment="mainContent">
         <div class="row">
@@ -59,10 +63,11 @@
                     data-searching="false" data-paging-type="full_numbers" th:attr="data-order='[[3, \'desc\']]', data-ajax=@{/feedback/search/data}">
                     <thead>
                         <tr>
-                            <th class="code" th:text="#{Page}" data-class="code" data-data="page">Page</th>
-                            <th class="code" th:text="#{Comment}" data-class="code" data-data="comment">Comment</th>
+                            <th class="feedback" th:text="#{Page}" data-class="feedback" data-data="page" data-render="ellipsis">Page</th>
+                            <th class="comment" th:text="#{Comment}" data-class="comment" data-sortable="false"  data-data="comment" data-render="ellipsis">Comment</th>
                             <th class="rating-loading" th:text="#{Evaluation}" data-class="rating-loading" data-data="rate" data-template="rate">Evaluation</th>
                             <th class="date" th:text="#{Date}" data-data="updated" data-class="date" data-render="duration">Updated</th>
+                            <th class="toolbar" data-class="toolbar" data-sortable="false" data-template="toolbar"></th>
                         </tr>
                     </thead>
                 </table>
