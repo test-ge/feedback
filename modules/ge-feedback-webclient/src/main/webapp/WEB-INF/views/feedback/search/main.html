@@ -47,7 +47,7 @@
         </div>
     </script>
     <script id="tpl-toolbar" type="text/x-handlebars-template">
-        <a th:href="@{/feedback/{{id}}/display}" role="remove" data-code="{{code}}" th:title="#{Display}"><i class="fa fa-eye"></i></a>
+        <a th:href="@{/feedback/display?id={{id}}}" role="remove" data-code="{{code}}" th:title="#{Display}"><i class="fa fa-eye"></i></a>
     </script>
 </th:block>
 </head>

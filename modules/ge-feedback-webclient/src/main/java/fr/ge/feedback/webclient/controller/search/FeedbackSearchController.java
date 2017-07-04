@@ -35,11 +35,10 @@ package fr.ge.feedback.webclient.controller.search;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ws.rs.QueryParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -83,8 +82,8 @@ public class FeedbackSearchController extends AbstractSearchController<ResponseF
         return Collections.emptyList();
     }
 
-    @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public String edit(final Model model, @QueryParam("id") final long id) {
+    @RequestMapping(value = "/{id}/display", method = RequestMethod.GET)
+    public String edit(final Model model, @PathVariable("id") final long id) {
         final ResponseFeedbackBean bean = this.feedbackRestService.get(id);
 
         model.addAttribute("bean", bean);
