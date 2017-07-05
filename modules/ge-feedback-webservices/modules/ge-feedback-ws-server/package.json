@@ -1,0 +1,26 @@
+{
+  "name": "ge-feedback-ws-server",
+  "version": "1.0.0-SNAPSHOT",
+  "description": "...",
+  "author": "Christian Cougourdan",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "postinstall": "grunt",
+    "watch": "grunt && grunt watch"
+  },
+  "dependencies": {
+    "jquery": "~3.2.1",
+    "jquery-bar-rating": "~1.2.2"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2",
+    "mime-types": "^2.1.15"
+  }
+}
