@@ -1,0 +1,101 @@
+
+@blue: #0092BC;
+
+#feedback-widget {
+
+    background-color: @blue;
+    color: #fff;
+    font-size: 14px;
+    font-family: Helvetica;
+    border-bottom-left-radius: .3em;
+    border-top-left-radius: .3em;
+    bottom: 4em;
+    min-height: 46px;
+    min-width: 46px;
+    padding: .4em;
+    position: fixed;
+    right: 0;
+
+    transition: width .8s, height .8s;
+
+    @import "../../../../node_modules/jquery-bar-rating/themes/css-stars.less";
+
+    > #fbw-main-btn {
+        background-color: transparent;
+        border-style: none;
+        float: left;
+        margin: 2px;
+        padding: 0;
+    }
+
+    &.expanded > #fbw-wrapper {
+        display: block;
+    }
+
+    > #fbw-wrapper {
+
+        display: none;
+
+        > form {
+
+            > #fbw-rating {
+
+                height: 42px;
+                line-height: 42px;
+                margin: 2px 6px 2px 54px;
+
+                > #fbw-rating-label {
+                    display: inline-block;
+                    width: 12em;
+                }
+
+                > #fbx-rating-input {
+                    display: inline-block;
+                }
+
+            }
+
+            > #fbw-comment {
+
+                display: none;
+                margin: 2px 6px 2px 54px;
+
+                > label {
+                    display: block;
+                    margin: 4px 0;
+                }
+
+                > textarea {
+                    display: block;
+                    margin: 8px 0;
+                    min-height: 4.5em;
+                    max-height: 4.5em;
+                    min-width: 100%;
+                    max-width: 100%;
+                }
+
+                > button {
+                    background-color: #fff;
+                    border: none;
+                    border-radius: .3em;
+                    color: @blue;
+                    padding: .3em 1em;
+                }
+
+            }
+
+            > #fbw-thanks {
+
+                display: none;
+                height: 42px;
+                line-height: 42px;
+                margin: 2px 6px 2px 54px;
+
+            }
+
+        }
+
+    }
+
+}
+
