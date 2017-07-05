@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{commons/layout/default(scripts=~{::scripts}, mainContent=~{::mainContent}, breadcrumbs=~{::breadcrumbs})}">
+<head>
+    <title>Feedback Administration Console</title>
+    <th:block th:fragment="scripts">
+    <script id="tpl-rate" type="text/x-handlebars-template">
+        <div class="rating">
+            <span class="rate-{{rate}}"><i class="fa fa-star"></i></span>
+            <span class="rate-{{rate}}"><i class="fa fa-star"></i></span>
+            <span class="rate-{{rate}}"><i class="fa fa-star"></i></span>
+            <span class="rate-{{rate}}"><i class="fa fa-star"></i></span>
+            <span class="rate-{{rate}}"><i class="fa fa-star"></i></span>
+        </div>
+    </script>
+</th:block>
+</head>
+<body>
+    <ol class="breadcrumb" th:fragment="breadcrumbs">
+        <li>
+            <a th:href="@{/}" th:text="#{Home}"></a>
+        </li>
+    </ol>
+    <div th:fragment="mainContent">
+        <div class="row">
+            <div class="col-md-12">
+                <form name="feedback" class="form-horizontal">
+                    <div class="form-group row">
+                        <label for="funcId" class="control-label col-md-2" th:text="#{Page}"></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="page" th:value="${bean.page}" th:readonly="${bean.page}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="label" class="control-label col-md-2" th:text="#{Evaluation}"></label>
+                        <div class="col-md-3">
+                           <div class="rating">
+                                <span th:class="${'rate-' + bean.rate}"><i class="fa fa-star"></i></span>
+                                <span th:class="${'rate-' + bean.rate}"><i class="fa fa-star"></i></span>
+                                <span th:class="${'rate-' + bean.rate}"><i class="fa fa-star"></i></span>
+                                <span th:class="${'rate-' + bean.rate}"><i class="fa fa-star"></i></span>
+                                <span th:class="${'rate-' + bean.rate}"><i class="fa fa-star"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="label" class="control-label col-md-2" th:text="#{Comment}"></label>
+                        <div class="col-md-10">
+                            <textarea rows="4" cols="30" class="form-control" name="label" th:text="${bean.comment}" th:readonly="${bean.comment}"></textarea>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+        </div>
+    </div>
+</body>
+</html>

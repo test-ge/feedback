@@ -43,6 +43,9 @@
     <util:properties id="appProperties" location="classpath:test.properties" />
     <context:property-placeholder properties-ref="appProperties" />
 
+     <bean id="feedbackRestService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="fr.ge.feedback.ws.v1.service.IFeedbackRestService" />
+    </bean>
     <import resource="classpath:spring/log-filter-context.xml" />
     <import resource="classpath:spring/dispatcher-context.xml" />
     
