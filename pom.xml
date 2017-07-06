@@ -131,7 +131,6 @@
         <mybatis.version>3.4.2</mybatis.version>
         <mybatis-spring.version>1.3.1</mybatis-spring.version>
 
-        <css-target-dir>${project.build.directory}/${project.name}/css</css-target-dir>
         <webapp-target-dir>${project.build.directory}/${project.build.finalName}</webapp-target-dir>
 
         <log.appender.root>thirdParty</log.appender.root>
@@ -666,7 +665,6 @@
                 </resources>
             </build>
             <properties>
-                <css-target-dir>${project.build.directory}/m2e-wtp/web-resources/css</css-target-dir>
                 <webapp-target-dir>${project.build.directory}/m2e-wtp/web-resources</webapp-target-dir>
 
                 <jndi.db.datasource>jdbc/feedback</jndi.db.datasource>
@@ -690,6 +688,7 @@
                 <directory.baseUrl>http://forms-admin.dev.guichet-partenaires.fr:8081/ge-directory-ws-server/api</directory.baseUrl>
                 
                 <ws.feedback.url>http://localhost:10080/ge-feedback-ws-server/api</ws.feedback.url>
+                <ws.feedback.public.url>http://localhost:10080/ge-feedback-ws-server/api</ws.feedback.public.url>
 
                 <log.file.technical>${project.build.directory}/logs/tech.log</log.file.technical>
                 <log.file.functional>${project.build.directory}/logs/func.log</log.file.functional>

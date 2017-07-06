@@ -1,10 +1,12 @@
 /**
- * 
+ *
  */
 package fr.ge.feedback.ws.v1.service.impl;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
@@ -14,6 +16,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -44,10 +47,13 @@ import fr.ge.feedback.ws.v1.service.IFeedbackRestService;
 public class FeedbackRestServiceTest {
 
     @Autowired
-    IFeedbackRestService feedbackRestService;
+    private Properties appProperties;
 
     @Autowired
-    IFeedbackService feedbackService;
+    private IFeedbackRestService feedbackRestService;
+
+    @Autowired
+    private IFeedbackService feedbackService;
 
     @Before
     public void setUp() throws Exception {
@@ -57,7 +63,7 @@ public class FeedbackRestServiceTest {
     @Test
     public void testCreate() {
         when(this.feedbackService.create(Mockito.any(FeedbackBean.class))).thenReturn(1L);
-        Response response = this.feedbackRestService.createFeedBack("comment", "/test/test1", 1L);
+        final Response response = this.feedbackRestService.createFeedBack("comment", "/test/test1", 1L);
 
         assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
 
@@ -66,7 +72,7 @@ public class FeedbackRestServiceTest {
     @Test
     public void testUpdate() {
         when(this.feedbackService.update(Mockito.any(FeedbackBean.class))).thenReturn(1L);
-        Response response = this.feedbackRestService.updateFeedBack("comment", "/test/test1", 5L, 1L);
+        final Response response = this.feedbackRestService.updateFeedBack("comment", "/test/test1", 5L, 1L);
 
         assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
 
@@ -75,7 +81,7 @@ public class FeedbackRestServiceTest {
     @Test
     public void testDelete() {
         when(this.feedbackService.deleteById(Mockito.any(Long.class))).thenReturn(1L);
-        Response response = this.feedbackRestService.deleteFeedBack(1L);
+        final Response response = this.feedbackRestService.deleteFeedBack(1L);
 
         assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
 
@@ -128,6 +134,18 @@ public class FeedbackRestServiceTest {
         assertEquals(responseFeedback.getPage(), feedbackBean.getPage());
         assertEquals(responseFeedback.getComment(), feedbackBean.getComment());
         assertEquals(responseFeedback.getCreated(), feedbackBean.getCreated());
+    }
+
+    @Test
+    public void testWidget() {
+        final Response response = this.feedbackRestService.widget();
+
+        assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
+
+        final String actual = response.readEntity(String.class);
+
+        assertThat(actual, notNullValue());
+        assertThat(actual.indexOf(this.appProperties.getProperty("ws.feedback.public.url")), greaterThanOrEqualTo(0));
     }
 
 }

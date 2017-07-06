@@ -34,25 +34,44 @@
     $(function() {
         $('<link rel="stylesheet" href="%%INC:css/widget.css%%" />').appendTo('head');
         var root = $(tpl).appendTo('body'), wrapper = $('> #fbw-wrapper', root);
+        var uid;
 
         var widget = {
-                root: root,
-                wrapper: wrapper,
-                rating : $('> form > #fbw-rating', wrapper),
-                comment : $('> form > #fbw-comment', wrapper),
-                thanks : $('> form > #fbw-thanks', wrapper),
-                show: function () {
-                    this.rating.show();
-                    this.comment.hide();
-                    this.thanks.hide();
-                    this.root.addClass('expanded').css('width', root.width());
-                },
-                hide: function () {
-                    this.root.removeClass('expanded').css('width', '');
-                }
+            root : root,
+            wrapper : wrapper,
+            rating : $('> form > #fbw-rating', wrapper),
+            comment : $('> form > #fbw-comment', wrapper),
+            thanks : $('> form > #fbw-thanks', wrapper),
+            show : function() {
+                uid = null;
+                $('> form', wrapper).get(0).reset();
+                $('> #fbx-rating-input select[name="rating"]', widget.rating).barrating('set', 3);
+                this.rating.show();
+                this.comment.hide();
+                this.thanks.hide();
+                this.root.addClass('expanded').css('width', root.width());
+            },
+            hide : function() {
+                this.root.removeClass('expanded').css('width', '');
+            }
         };
 
-        $('> #fbw-main-btn', widget.root).on('click', function (evt) {
+        function buildServiceUri(data) {
+            var serviceBaseUri;
+            if (uid) {
+                serviceBaseUri = '${ws.feedback.public.url}/v1/feedback/update?id=' + uid + '&';
+            } else {
+                serviceBaseUri = '${ws.feedback.public.url}/v1/feedback/create?';
+            }
+
+            return {
+                url: serviceBaseUri + $.param(data),
+                dataType: 'text',
+                method: uid ? 'PUT' : 'POST'
+            };
+        }
+
+        $('> #fbw-main-btn', widget.root).on('click', function(evt) {
             evt.preventDefault();
             if (widget.root.hasClass('expanded')) {
                 widget.hide();
@@ -61,19 +80,36 @@
             }
         });
 
-        $(document).on('click', function (evt) {
+        $(document).on('click', function(evt) {
         });
 
-        $('> #fbx-rating-input > select[name="rating"]', widget.rating).barrating({
+        $('> #fbx-rating-input select[name="rating"]', widget.rating).barrating({
             theme : 'css-stars',
             onSelect : function(value, text, evt) {
                 $('> #fbw-rating-label', widget.rating).text(text);
+
+                
+                $.ajax(buildServiceUri({
+                    rate : value,
+                    comment : '',
+                    page : window.location.href
+                })).done(function (data) {
+                    uid = data;
+                });
                 $(widget.comment).show();
             }
         });
 
-        $('> form', widget.wrapper).on('submit', function (evt) {
+        $('> form', widget.wrapper).on('submit', function(evt) {
+            var form = $(this);
             evt.preventDefault();
+
+            $.ajax(buildServiceUri({
+                rate: $('select[name="rating"]', form).val(),
+                comment: $('textarea[name="comment"]', form).val(),
+                page: window.location.href
+            }));
+
             widget.rating.hide();
             widget.comment.hide();
             widget.thanks.show();

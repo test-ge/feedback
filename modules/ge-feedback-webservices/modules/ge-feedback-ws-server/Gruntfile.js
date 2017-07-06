@@ -15,8 +15,8 @@ function buildStyle(basePath, name) {
 
 module.exports = function (grunt) {
 
-    var basedir = 'src/main/webapp';
-    var distdir = 'target/m2e-wtp/web-resources';
+    var basedir = 'src/main/resources/public';
+    var distdir = grunt.option('destination') || 'target/classes';
 
     var pkg = grunt.file.readJSON('package.json');
 
