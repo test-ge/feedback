@@ -155,6 +155,9 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>public/**/*</exclude>
+                </excludes>
             </resource>
             <resource>
                 <filtering>true</filtering>
@@ -185,29 +188,7 @@
                         </goals>
                         <configuration>
                             <srcdir>src/main/resources/public</srcdir>
-                            <arguments>--destination=${project.build.directory}/generated/public</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-public-resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.build.directory}/generated</directory>
-                                    <filtering>false</filtering>
-                                    <include>public/**</include>
-                                </resource>
-                            </resources>
+                            <arguments>--destination=${project.build.outputDirectory}/public</arguments>
                         </configuration>
                     </execution>
                 </executions>
