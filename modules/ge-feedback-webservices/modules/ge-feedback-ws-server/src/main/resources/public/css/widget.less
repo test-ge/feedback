@@ -34,6 +34,8 @@
 
     > #fbw-wrapper {
 
+        transition: width .8s, height .8s;
+
         display: none;
 
         > form {
@@ -43,6 +45,7 @@
                 height: 42px;
                 line-height: 42px;
                 margin: 2px 6px 2px 54px;
+                white-space: nowrap;
 
                 > #fbw-rating-label {
                     display: inline-block;
@@ -66,6 +69,7 @@
                 }
 
                 > textarea {
+                    color: #333;
                     display: block;
                     margin: 8px 0;
                     min-height: 4.5em;
