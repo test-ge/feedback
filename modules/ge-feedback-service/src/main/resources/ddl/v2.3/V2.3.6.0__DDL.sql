@@ -1,6 +1,6 @@
 CREATE TABLE feedback (
      id         BIGINT      NOT NULL,
-     comment    VARCHAR(255) NOT NULL,
+     comment    VARCHAR(255),
      page       VARCHAR(255),
      rate       BIGINT      NOT NULL,
      created    TIMESTAMP   NOT NULL,

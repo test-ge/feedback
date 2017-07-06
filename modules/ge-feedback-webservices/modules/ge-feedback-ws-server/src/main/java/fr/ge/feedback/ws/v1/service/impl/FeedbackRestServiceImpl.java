@@ -1,15 +1,23 @@
 /**
- * 
+ *
  */
 package fr.ge.feedback.ws.v1.service.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.ge.feedback.core.bean.search.SearchQuery;
@@ -18,6 +26,7 @@ import fr.ge.feedback.core.bean.search.SearchQueryOrder;
 import fr.ge.feedback.core.bean.search.SearchResult;
 import fr.ge.feedback.service.IFeedbackService;
 import fr.ge.feedback.service.bean.FeedbackBean;
+import fr.ge.feedback.ws.util.CoreUtil;
 import fr.ge.feedback.ws.v1.bean.ResponseFeedbackBean;
 import fr.ge.feedback.ws.v1.service.IFeedbackRestService;
 import io.swagger.annotations.Api;
@@ -32,14 +41,21 @@ import io.swagger.annotations.ApiParam;
 @Path("/v1/feedback")
 public class FeedbackRestServiceImpl implements IFeedbackRestService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FeedbackRestServiceImpl.class);
+
+    private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("[$][{]([^}]+)[}]");
+
     @Autowired
-    IFeedbackService feedbackService;
+    private Properties appProperties;
+
+    @Autowired
+    private IFeedbackService feedbackService;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Response createFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") Long rate) {
+    public Response createFeedBack(@ApiParam("User feedback  for specific page ") final String comment, @ApiParam("URI of page ") final String page, @ApiParam("User evaluation") final Long rate) {
         final FeedbackBean feedback = new FeedbackBean();
         feedback.setComment(StringUtils.substring(comment, 0, 254));
         feedback.setPage(StringUtils.substring(page, 0, 254));
@@ -49,15 +65,15 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
 
         this.feedbackService.create(feedback);
 
-        return Response.ok().build();
+        return Response.ok(feedback.getId()).build();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Response updateFeedBack(@ApiParam("User feedback  for specific page ") String comment, @ApiParam("URI of page ") String page, @ApiParam("User evaluation") Long rate,
-            @ApiParam("id of feedback") Long id) {
+    public Response updateFeedBack(@ApiParam("User feedback  for specific page ") final String comment, @ApiParam("URI of page ") final String page, @ApiParam("User evaluation") final Long rate,
+            @ApiParam("id of feedback") final Long id) {
 
         final FeedbackBean feedback = new FeedbackBean();
         feedback.setId(id);
@@ -68,14 +84,14 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
 
         this.feedbackService.update(feedback);
 
-        return Response.ok().build();
+        return Response.ok(feedback.getId()).build();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Response deleteFeedBack(@ApiParam("id of feedback") Long id) {
+    public Response deleteFeedBack(@ApiParam("id of feedback") final Long id) {
 
         this.feedbackService.deleteById(id);
 
@@ -99,6 +115,26 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
             @ApiParam("orders as \"&lt;fieldName&gt;:&lt;asc|desc&gt;\"") final List<SearchQueryOrder> orders) {
         final SearchQuery searchQuery = new SearchQuery(startIndex, maxResults).setFilters(filters).setOrders(orders);
         return this.feedbackService.search(searchQuery, ResponseFeedbackBean.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Response widget() {
+
+        try (final InputStream in = this.getClass().getClassLoader().getResourceAsStream("public/js/widget.js")) {
+            final String script = new String(IOUtils.toByteArray(in), StandardCharsets.UTF_8);
+            return Response.ok(CoreUtil.searchAndReplace(script, PLACEHOLDER_PATTERN, m -> {
+                final String key = m.group(1);
+                final String value = this.appProperties.getProperty(key, m.group());
+                return value.replace("$", "\\$");
+            }), "text/javascript").build();
+        } catch (final IOException ex) {
+            LOGGER.warn("Unable to read widget script", ex);
+        }
+
+        return Response.noContent().build();
     }
 
 }
