@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,9 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
 
     @Autowired
     private IFeedbackService feedbackService;
+
+    @Autowired
+    private DozerBeanMapper dozer;
 
     /**
      * {@inheritDoc}
@@ -115,6 +119,21 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
             @ApiParam("orders as \"&lt;fieldName&gt;:&lt;asc|desc&gt;\"") final List<SearchQueryOrder> orders) {
         final SearchQuery searchQuery = new SearchQuery(startIndex, maxResults).setFilters(filters).setOrders(orders);
         return this.feedbackService.search(searchQuery, ResponseFeedbackBean.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResponseFeedbackBean get(final long id) {
+        ResponseFeedbackBean responseFeedback;
+        final FeedbackBean feedback = this.feedbackService.findById(id);
+        if (feedback == null) {
+            responseFeedback = new ResponseFeedbackBean();
+        } else {
+            responseFeedback = this.dozer.map(feedback, ResponseFeedbackBean.class);
+        }
+        return responseFeedback;
     }
 
     /**

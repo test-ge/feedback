@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -109,6 +110,30 @@ public class FeedbackRestServiceTest {
         assertThat(response, //
                 hasProperty("totalResults", equalTo(3L)) //
         );
+    }
+
+    @Test
+    public void testGet() {
+        ResponseFeedbackBean feedbackBean = new ResponseFeedbackBean();
+        when(this.feedbackService.findById(1L)).thenReturn(null);
+        feedbackBean = this.feedbackRestService.get(1L);
+
+        assertEquals(feedbackBean.getPage(), null);
+        assertEquals(feedbackBean.getComment(), null);
+        assertEquals(feedbackBean.getCreated(), null);
+    }
+
+    @Test
+    public void testGetNotNull() {
+        FeedbackBean feedbackBean = new FeedbackBean();
+        feedbackBean.setComment("test test");
+        feedbackBean.setPage("/page/page1");
+        when(this.feedbackService.findById(1L)).thenReturn(feedbackBean);
+        ResponseFeedbackBean responseFeedback = this.feedbackRestService.get(1L);
+
+        assertEquals(responseFeedback.getPage(), feedbackBean.getPage());
+        assertEquals(responseFeedback.getComment(), feedbackBean.getComment());
+        assertEquals(responseFeedback.getCreated(), feedbackBean.getCreated());
     }
 
     @Test

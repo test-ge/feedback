@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -94,6 +95,18 @@ public interface IFeedbackRestService {
             @QueryParam("filters[]") List<SearchQueryFilter> filters, //
             @QueryParam("orders[]") List<SearchQueryOrder> orders //
     );
+
+    /**
+     * Retrieves an feedback by `.
+     *
+     * @param id
+     *            the id
+     * @return found authority
+     */
+    @GET
+    @Path("/{id : \\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    ResponseFeedbackBean get(@PathParam("id") long id);
 
     @GET
     @Path("/widget.js")

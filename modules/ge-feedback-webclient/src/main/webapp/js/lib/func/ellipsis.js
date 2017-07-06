@@ -1,5 +1,5 @@
 /*
- * Copyright SCN Guichet Entreprises, Capgemini and contributors (2016-2017)
+ * Copyright SCN Guichet Entreprises, Capgemini and contributors (2014-2016)
  *
  * This software is a computer program whose purpose is to maintain and
  * administrate standalone forms.
@@ -30,58 +30,15 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL license and that you accept its terms.
  */
+define([], function() {
 
-package fr.ge.feedback.service.persistence.entity;
+	return function (data) {
+		if(data.length < 20){
+			return data; 
+		}else{
+			return data.substr( 0, 20 ) + '...';
+		}
+	};
 
-/**
- * The Class QueueMessageSummaryEntity.
- *
- * @author Christian Cougourdan
- */
-public class QueueMessageSummaryEntity {
 
-    /** The queue name. */
-    private String queueName;
-
-    /** The total entries. */
-    private Long totalEntries;
-
-    /**
-     * Gets the queue name.
-     *
-     * @return the queue name
-     */
-    public String getQueueName() {
-        return this.queueName;
-    }
-
-    /**
-     * Sets the queue name.
-     *
-     * @param queueName
-     *            the new queue name
-     */
-    public void setQueueName(final String queueName) {
-        this.queueName = queueName;
-    }
-
-    /**
-     * Gets the total entries.
-     *
-     * @return the total entries
-     */
-    public Long getTotalEntries() {
-        return this.totalEntries;
-    }
-
-    /**
-     * Sets the total entries.
-     *
-     * @param totalEntries
-     *            the new total entries
-     */
-    public void setTotalEntries(final Long totalEntries) {
-        this.totalEntries = totalEntries;
-    }
-
-}
+});

@@ -36,10 +36,11 @@
  *      lib/func/duration.js
  *      lib/func/sizeResume.js
  */ 
-define([ 'lib/func/renderer', 'lib/func/duration', 'lib/func/sizeResume' ], function (renderer, duration, sizeResume) {
+define([ 'lib/func/renderer', 'lib/func/duration', 'lib/func/sizeResume','lib/func/ellipsis' ], function (renderer, duration, sizeResume,ellipsis) {
     return {
         renderer: renderer,
         duration: duration,
-        sizeResume: sizeResume
+        sizeResume: sizeResume,
+        ellipsis: ellipsis
     };
 });

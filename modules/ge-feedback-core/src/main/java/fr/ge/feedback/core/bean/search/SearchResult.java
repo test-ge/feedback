@@ -33,6 +33,7 @@
 package fr.ge.feedback.core.bean.search;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -163,6 +164,84 @@ public class SearchResult<T> {
         } else {
             this.content = new ArrayList<>(content);
         }
+    }
+
+    public static class Builder<T> {
+
+        /** The start index. */
+        private long _startIndex;
+
+        /** The max results. */
+        private long _maxResults = DEFAULT_MAXRESULTS;
+
+        /** The total results. */
+        private long _totalResults;
+
+        /** The content. */
+        private List<T> _content;
+
+        /**
+         * Start index.
+         *
+         * @param value
+         *            the value
+         * @return the builder
+         */
+        public Builder<T> startIndex(final long value) {
+            this._startIndex = value;
+            return this;
+        }
+
+        /**
+         * Max results.
+         *
+         * @param value
+         *            the value
+         * @return the builder
+         */
+        public Builder<T> maxResults(final long value) {
+            this._maxResults = value;
+            return this;
+        }
+
+        /**
+         * Total results.
+         *
+         * @param value
+         *            the value
+         * @return the builder
+         */
+        public Builder<T> totalResults(final long value) {
+            this._totalResults = value;
+            return this;
+        }
+
+        /**
+         * Content.
+         *
+         * @param value
+         *            the value
+         * @return the builder
+         */
+        public Builder<T> content(@SuppressWarnings("unchecked") final T... value) {
+            this._content = Arrays.asList(value);
+            return this;
+        }
+
+        /**
+         * Builds the.
+         *
+         * @return the search result
+         */
+        public SearchResult<T> build() {
+            final SearchResult<T> obj = new SearchResult<>();
+            obj.setStartIndex(this._startIndex);
+            obj.setMaxResults(this._maxResults);
+            obj.setTotalResults(this._totalResults);
+            obj.setContent(this._content);
+            return obj;
+        }
+
     }
 
 }

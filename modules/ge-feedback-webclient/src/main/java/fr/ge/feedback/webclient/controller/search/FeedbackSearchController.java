@@ -37,7 +37,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.ge.feedback.core.bean.search.SearchQuery;
 import fr.ge.feedback.core.bean.search.SearchQueryFilter;
@@ -77,6 +80,15 @@ public class FeedbackSearchController extends AbstractSearchController<ResponseF
     @Override
     protected List<SearchQueryFilter> getDefaultSearchFilters() {
         return Collections.emptyList();
+    }
+
+    @RequestMapping(value = "/{id}/display", method = RequestMethod.GET)
+    public String edit(final Model model, @PathVariable("id") final long id) {
+        final ResponseFeedbackBean bean = this.feedbackRestService.get(id);
+
+        model.addAttribute("bean", bean);
+
+        return "feedback/display/main";
     }
 
     /**
