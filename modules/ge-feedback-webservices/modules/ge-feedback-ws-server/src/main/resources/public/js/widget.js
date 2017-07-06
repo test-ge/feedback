@@ -49,7 +49,7 @@
                 this.rating.show();
                 this.comment.hide();
                 this.thanks.hide();
-                this.root.addClass('expanded').css('width', root.width());
+                this.root.addClass('expanded').width(this.root.width());
             },
             hide : function() {
                 this.root.removeClass('expanded').css('width', '');
