@@ -8,8 +8,8 @@
             + '     <div id="fbw-wrapper">' //
             + '         <form>' //
             + '             <div id="fbw-rating">' //
-            + '                 <span id="fbw-rating-label">Notez cette page</span>' //
-            + '                 <div id="fbx-rating-input">' //
+            + '                 <span id="fbw-rating-label"></span>' //
+            + '                 <div id="fbw-rating-input">' //
             + '                     <select name="rating">' //
             + '                         <option value="1">A revoir</option>' //
             + '                         <option value="2">Tr&egrave;s insatisfait</option>' //
@@ -39,20 +39,38 @@
         var widget = {
             root : root,
             wrapper : wrapper,
+            modal : null,
             rating : $('> form > #fbw-rating', wrapper),
             comment : $('> form > #fbw-comment', wrapper),
             thanks : $('> form > #fbw-thanks', wrapper),
+            label : null,
+            defaultLabel : 'Notez cette page',
+            timeout : -1,
             show : function() {
                 uid = null;
+                this.modal = $('<div></div>').insertBefore(this.root).css({
+                    'background-color' : 'transparent',
+                    'bottom' : '0px',
+                    'left' : '0px',
+                    'position' : 'fixed',
+                    'right' : '0px',
+                    'top' : '0px',
+                }).on('click', function (evt) {
+                    widget.hide();
+                });
                 $('> form', wrapper).get(0).reset();
-                $('> #fbx-rating-input select[name="rating"]', widget.rating).barrating('set', 3);
+                $('> #fbw-rating-input select[name="rating"]', widget.rating).barrating('clear');
+                this.label = this.defaultLabel;
                 this.rating.show();
                 this.comment.hide();
                 this.thanks.hide();
                 this.root.addClass('expanded').width(this.root.width());
             },
             hide : function() {
+                this.root.off('mouseout').off('mouseover');
                 this.root.removeClass('expanded').css('width', '');
+                this.modal.remove();
+                this.modal = null;
             }
         };
 
@@ -78,17 +96,17 @@
             } else {
                 widget.show();
             }
+            return false;
         });
 
         $(document).on('click', function(evt) {
         });
 
-        $('> #fbx-rating-input select[name="rating"]', widget.rating).barrating({
+        $('> #fbw-rating-input select[name="rating"]', widget.rating).barrating({
             theme : 'css-stars',
             onSelect : function(value, text, evt) {
-                $('> #fbw-rating-label', widget.rating).text(text);
+                $('> #fbw-rating-label', widget.rating).text(widget.label = text);
 
-                
                 $.ajax(buildServiceUri({
                     rate : value,
                     comment : '',
@@ -97,7 +115,16 @@
                     uid = data;
                 });
                 $(widget.comment).show();
+            },
+            onClear : function (value, text) {
+                $('#fbw-rating-label', widget.rating).text(widget.defaultLabel);
             }
+        });
+
+        $('> #fbw-rating-input .br-widget > a', widget.rating).on('mouseenter.feedback', function () {
+            $('#fbw-rating-label', widget.rating).text($(this).data('rating-text'));
+        }).on('mouseleave.feedback', function () {
+            $('#fbw-rating-label', widget.rating).text(widget.label);
         });
 
         $('> form', widget.wrapper).on('submit', function(evt) {
@@ -113,6 +140,14 @@
             widget.rating.hide();
             widget.comment.hide();
             widget.thanks.show();
+
+            widget.root.on('mouseleave.feedback', function (evt) {
+                widget.timeout = setTimeout(function () {
+                    widget.hide();
+                }, 2000);
+            }).on('mouseenter.feedback', function (evt) {
+                clearTimeout(widget.timeout);
+            });
         });
     });
 
