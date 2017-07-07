@@ -16,7 +16,7 @@ function buildStyle(basePath, name) {
 module.exports = function (grunt) {
 
     var basedir = 'src/main/resources/public';
-    var distdir = grunt.option('destination') || 'target/classes';
+    var distdir = grunt.option('destination') || 'target/classes/public';
 
     var pkg = grunt.file.readJSON('package.json');
 
