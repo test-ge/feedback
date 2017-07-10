@@ -21,6 +21,7 @@
     "grunt-cli": "~1.2.0",
     "grunt-contrib-copy": "~1.0.0",
     "grunt-contrib-less": "~1.4.1",
+    "grunt-contrib-uglify": "~3.0.1",
     "grunt-contrib-watch": "~1.0.0",
     "load-grunt-tasks": "~3.5.2",
     "mime-types": "~2.1.15",
