@@ -33,9 +33,9 @@
 	<name>GE Feedback</name>
 
 	<scm>
-		<connection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/feedback.git</connection>
-		<developerConnection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/feedback.git</developerConnection>
-		<url>https://tools.projet-ge.fr/gitlab/minecraft/feedback</url>
+		<connection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback.git</connection>
+		<developerConnection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback.git</developerConnection>
+		<url>https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback</url>
 	</scm>
 
 	<developers>
