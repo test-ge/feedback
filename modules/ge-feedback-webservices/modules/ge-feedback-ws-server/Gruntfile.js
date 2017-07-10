@@ -49,6 +49,10 @@ module.exports = function (grunt) {
         };
     }).concat(styles);
 
+    var filesToBrowserify = grunt.file.expandMapping([ '*.js' ], distdir + '/js', {
+        cwd: basedir + '/js'
+    });
+
     grunt.initConfig({
         pkg: pkg,
         project: {
@@ -59,9 +63,7 @@ module.exports = function (grunt) {
         },
         browserify: {
             dist: {
-                files: grunt.file.expandMapping([ '*.js' ], distdir + '/js', {
-                    cwd: basedir + '/js'
-                }),
+                files: filesToBrowserify,
                 options: {
                     transform: [ function (file) {
                         return through(function write(buffer, encoding, next) {
@@ -71,6 +73,13 @@ module.exports = function (grunt) {
                         })
                     } ]
                 }
+            }
+        },
+        uglify: {
+            dist: {
+                files: filesToBrowserify.map(function (elm) {
+                    return { src: elm.dest, dest: elm.dest.replace(/\.js$/, '-min.js') };
+                })
             }
         },
         less: {
@@ -128,6 +137,6 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     require('./contrib/grunt-contrib-extract.js')(grunt);
 
-    grunt.registerTask('default', [ 'less', 'extract', 'copy', 'browserify' ]);
+    grunt.registerTask('default', [ 'less', 'extract', 'copy', 'browserify', 'uglify' ]);
 
 };
