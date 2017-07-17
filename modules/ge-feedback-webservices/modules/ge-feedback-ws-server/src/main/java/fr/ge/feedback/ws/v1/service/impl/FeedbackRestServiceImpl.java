@@ -46,6 +46,8 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
 
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("[$][{]([^}]+)[}]");
 
+    private String widgetScriptResource;
+
     @Autowired
     private Properties appProperties;
 
@@ -142,18 +144,29 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
     @Override
     public Response widget() {
 
-        try (final InputStream in = this.getClass().getClassLoader().getResourceAsStream("public/js/widget-min.js")) {
-            final String script = new String(IOUtils.toByteArray(in), StandardCharsets.UTF_8);
-            return Response.ok(CoreUtil.searchAndReplace(script, PLACEHOLDER_PATTERN, m -> {
-                final String key = m.group(1);
-                final String value = this.appProperties.getProperty(key, m.group());
-                return value.replace("$", "\\$");
-            }), "text/javascript").build();
-        } catch (final IOException ex) {
-            LOGGER.warn("Unable to read widget script", ex);
+        final String scriptResource = this.getWidgetFromCache();
+        if (null == scriptResource) {
+            return Response.noContent().build();
+        } else {
+            return Response.ok(scriptResource, "text/javascript").build();
+        }
+    }
+
+    private String getWidgetFromCache() {
+        if (null == this.widgetScriptResource) {
+            try (final InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("public/js/widget-min.js")) {
+                final String script = new String(IOUtils.toByteArray(in), StandardCharsets.UTF_8);
+                this.widgetScriptResource = CoreUtil.searchAndReplace(script, PLACEHOLDER_PATTERN, m -> {
+                    final String key = m.group(1);
+                    final String value = this.appProperties.getProperty(key, m.group());
+                    return value.replace("$", "\\$");
+                });
+            } catch (final IOException ex) {
+                LOGGER.warn("Unable to read widget script", ex);
+            }
         }
 
-        return Response.noContent().build();
+        return this.widgetScriptResource;
     }
 
 }
