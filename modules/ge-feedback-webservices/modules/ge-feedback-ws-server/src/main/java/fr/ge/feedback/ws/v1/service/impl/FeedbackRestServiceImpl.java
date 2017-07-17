@@ -142,7 +142,7 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
     @Override
     public Response widget() {
 
-        try (final InputStream in = this.getClass().getClassLoader().getResourceAsStream("public/js/widget.js")) {
+        try (final InputStream in = this.getClass().getClassLoader().getResourceAsStream("public/js/widget-min.js")) {
             final String script = new String(IOUtils.toByteArray(in), StandardCharsets.UTF_8);
             return Response.ok(CoreUtil.searchAndReplace(script, PLACEHOLDER_PATTERN, m -> {
                 final String key = m.group(1);
