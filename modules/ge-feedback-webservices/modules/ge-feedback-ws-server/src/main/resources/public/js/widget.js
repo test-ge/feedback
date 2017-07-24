@@ -13,16 +13,16 @@
             + '                     <select name="rating">' //
             + '                         <option value="1">A revoir</option>' //
             + '                         <option value="2">Tr&egrave;s insatisfait</option>' //
-            + '                         <option value="3">Plut&ocirc;t insatisfait</option>' //
-            + '                         <option value="4">Plut&ocirc;t satisfait</option>' //
+            + '                         <option value="3">Plut&ocirc;t satisfait</option>' //
+            + '                         <option value="4">Satisfait</option>' //
             + '                         <option value="5">Tr&egrave;s satisfait</option>' //
             + '                     </select>' //
             + '                 </div>' //
             + '             </div>' //
             + '             <div id="fbw-comment">' //
             + '                 <label for="">Des suggestions ?</label>' //
-            + '                 <textarea name="comment"></textarea>' //
-            + '                 <button type="submit">Valider</button>' //
+            + '                 <textarea name="comment" id ="user-feedback-text"></textarea>' //
+            + '                 <button type="submit" id="user-feedback-submit">Valider</button>' //
             + '             </div>' //
             + '             <div id="fbw-thanks">' //
             + '                 Merci !' //
@@ -79,7 +79,7 @@
             if (uid) {
                 serviceBaseUri = '${ws.feedback.public.url}/v1/feedback/update?id=' + uid + '&';
             } else {
-                serviceBaseUri = '${ws.feedback.public.url}/v1/feedback/create?';
+                serviceBaseUri = '${ws.feedback.public.url}/public/v1/feedback/create?';
             }
 
             return {
@@ -119,6 +119,11 @@
             onClear : function (value, text) {
                 $('#fbw-rating-label', widget.rating).text(widget.defaultLabel);
             }
+        });
+
+        $('> #fbw-rating-input .br-widget > a').each(function() {
+            var currRating = $(this);
+            currRating.attr('id', 'user-feedback-rating-' + currRating.data('rating-value'));
         });
 
         $('> #fbw-rating-input .br-widget > a', widget.rating).on('mouseenter.feedback', function () {

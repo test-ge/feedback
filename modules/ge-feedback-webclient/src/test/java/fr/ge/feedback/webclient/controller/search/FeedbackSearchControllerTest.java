@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import fr.ge.feedback.ws.v1.bean.ResponseFeedbackBean;
-import fr.ge.feedback.ws.v1.service.IFeedbackRestService;
+import fr.ge.feedback.ws.v1.service.IFeedbackPrivateRestService;
 
 /**
  * @author bsadil
@@ -40,7 +40,7 @@ public class FeedbackSearchControllerTest {
     private WebApplicationContext webAppContext;
 
     @Autowired
-    private IFeedbackRestService service;
+    private IFeedbackPrivateRestService service;
 
     /**
      * Set up.

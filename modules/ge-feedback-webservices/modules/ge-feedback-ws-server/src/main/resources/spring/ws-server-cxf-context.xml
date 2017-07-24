@@ -51,9 +51,11 @@
 <!--     </cxf:bus> -->
 
    <bean id="feedbackRest" class="fr.ge.feedback.ws.v1.service.impl.FeedbackRestServiceImpl"/>
+   <bean id="feedbackPrivateRest" class="fr.ge.feedback.ws.v1.service.impl.FeedbackPrivateRestServiceImpl"/>
     <jaxrs:server id="restServer" address="/">
         <jaxrs:serviceBeans>
             <ref bean ="feedbackRest" />
+            <ref bean ="feedbackPrivateRest" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter" />
