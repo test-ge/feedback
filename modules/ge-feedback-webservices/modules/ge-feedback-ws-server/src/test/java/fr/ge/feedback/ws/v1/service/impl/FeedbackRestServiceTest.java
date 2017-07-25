@@ -60,6 +60,15 @@ public class FeedbackRestServiceTest {
     }
 
     @Test
+    public void testUpdate() {
+        when(this.feedbackService.update(Mockito.any(FeedbackBean.class))).thenReturn(1L);
+        final Response response = this.feedbackRestService.updateFeedBack("comment", "/test/test1", 5L, 1L);
+
+        assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
+
+    }
+
+    @Test
     public void testWidget() {
         final Response response = this.feedbackRestService.widget();
 

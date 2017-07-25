@@ -77,7 +77,7 @@
         function buildServiceUri(data) {
             var serviceBaseUri;
             if (uid) {
-                serviceBaseUri = '${ws.feedback.public.url}/v1/feedback/update?id=' + uid + '&';
+                serviceBaseUri = '${ws.feedback.public.url}/public/v1/feedback/update?id=' + uid + '&';
             } else {
                 serviceBaseUri = '${ws.feedback.public.url}/public/v1/feedback/create?';
             }

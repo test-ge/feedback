@@ -3,7 +3,6 @@
  */
 package fr.ge.feedback.ws.v1.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -11,7 +10,6 @@ import java.util.regex.Pattern;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,25 +49,6 @@ public class FeedbackPrivateRestServiceImpl implements IFeedbackPrivateRestServi
 
     @Autowired
     private DozerBeanMapper dozer;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Response updateFeedBack(@ApiParam("User feedback  for specific page ") final String comment, @ApiParam("URI of page ") final String page, @ApiParam("User evaluation") final Long rate,
-            @ApiParam("id of feedback") final Long id) {
-
-        final FeedbackBean feedback = new FeedbackBean();
-        feedback.setId(id);
-        feedback.setComment(StringUtils.substring(comment, 0, 254));
-        feedback.setPage(StringUtils.substring(page, 0, 254));
-        feedback.setRate(rate);
-        feedback.setUpdated(new Date());
-
-        this.feedbackService.update(feedback);
-
-        return Response.ok(feedback.getId()).build();
-    }
 
     /**
      * {@inheritDoc}

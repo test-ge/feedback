@@ -8,7 +8,6 @@ import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,21 +27,6 @@ import fr.ge.feedback.ws.v1.bean.ResponseFeedbackBean;
  */
 @Path("/private/v1/feedback")
 public interface IFeedbackPrivateRestService {
-
-    /**
-     * update a comment for specific page
-     *
-     * @param comment
-     *            message
-     * @param page
-     *            URI of the page
-     * @param rate
-     *            u
-     * @return
-     */
-    @PUT
-    @Path("/update")
-    Response updateFeedBack(@QueryParam("comment") String comment, @QueryParam("page") String page, @QueryParam("rate") Long rate, @QueryParam("id") Long id);
 
     /**
      * update a comment for specific page

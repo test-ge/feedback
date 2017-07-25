@@ -59,15 +59,6 @@ public class FeedbackPrivateRestServiceTest {
     }
 
     @Test
-    public void testUpdate() {
-        when(this.feedbackService.update(Mockito.any(FeedbackBean.class))).thenReturn(1L);
-        final Response response = this.feedbackRestService.updateFeedBack("comment", "/test/test1", 5L, 1L);
-
-        assertThat(response.getStatus(), equalTo(Status.OK.getStatusCode()));
-
-    }
-
-    @Test
     public void testDelete() {
         when(this.feedbackService.deleteById(Mockito.any(Long.class))).thenReturn(1L);
         final Response response = this.feedbackRestService.deleteFeedBack(1L);
