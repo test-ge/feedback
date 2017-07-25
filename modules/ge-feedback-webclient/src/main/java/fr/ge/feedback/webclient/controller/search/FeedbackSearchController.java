@@ -47,7 +47,7 @@ import fr.ge.feedback.core.bean.search.SearchQueryFilter;
 import fr.ge.feedback.core.bean.search.SearchResult;
 import fr.ge.feedback.webclient.controller.AbstractSearchController;
 import fr.ge.feedback.ws.v1.bean.ResponseFeedbackBean;
-import fr.ge.feedback.ws.v1.service.IFeedbackRestService;
+import fr.ge.feedback.ws.v1.service.IFeedbackPrivateRestService;
 
 /**
  * The Class RecordSearchController.
@@ -60,7 +60,7 @@ public class FeedbackSearchController extends AbstractSearchController<ResponseF
 
     /** The service. */
     @Autowired
-    private IFeedbackRestService feedbackRestService;
+    private IFeedbackPrivateRestService feedbackRestService;
 
     /**
      * {@inheritDoc}

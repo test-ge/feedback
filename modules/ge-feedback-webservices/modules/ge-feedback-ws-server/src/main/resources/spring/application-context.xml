@@ -35,6 +35,7 @@
 
     
     <bean id="feedbackService" class="fr.ge.feedback.service.impl.FeedbackServiceImpl"/>
+    <bean id="feedbackPrivateRest" class="fr.ge.feedback.ws.v1.service.impl.FeedbackPrivateRestServiceImpl"/>
 
     <context:component-scan base-package="fr.ge.feedback.ws.server">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />

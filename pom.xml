@@ -20,7 +20,8 @@
 	conditions as regards security. The fact that you are presently reading this 
 	means that you have had knowledge of the CeCILL license and that you accept 
 	its terms. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -35,14 +36,20 @@
 		<connection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback.git</connection>
 		<developerConnection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback.git</developerConnection>
 		<url>https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<developers>
 		<developer>
 			<id>ccougourdan</id>
 			<name>Christian Cougourdan</name>
 			<email>christian.cougourdan AT capgemini.com</email>
+			<organization>Capgemini</organization>
+		</developer>
+		<developer>
+			<id>absibiss</id>
+			<name>Adil Bsibiss</name>
+			<email>adil.bsibiss AT capgemini.com</email>
 			<organization>Capgemini</organization>
 		</developer>
 	</developers>
@@ -145,17 +152,17 @@
 		<dependencies>
 
 			<dependency>
-				<groupId>fr.ge.feedback</groupId>
+				<groupId>fr.ge.common.feedback</groupId>
 				<artifactId>ge-feedback-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>fr.ge.feedback</groupId>
+				<groupId>fr.ge.common.feedback</groupId>
 				<artifactId>ge-feedback-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>fr.ge.feedback</groupId>
+				<groupId>fr.ge.common.feedback</groupId>
 				<artifactId>ge-feedback-ws-contract</artifactId>
 				<version>${project.version}</version>
 			</dependency>

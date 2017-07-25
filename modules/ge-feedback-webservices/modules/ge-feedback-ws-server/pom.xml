@@ -38,14 +38,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>fr.ge.feedback</groupId>
+            <groupId>fr.ge.common.feedback</groupId>
             <artifactId>ge-feedback-service</artifactId>
         </dependency>
         <dependency>
-            <groupId>fr.ge.feedback</groupId>
+            <groupId>fr.ge.common.feedback</groupId>
             <artifactId>ge-feedback-ws-contract</artifactId>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

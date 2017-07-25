@@ -37,5 +37,11 @@
             <ref bean="jaxbJsonProvider" />
         </jaxrs:providers>
     </jaxrs:client>
+    
+    <jaxrs:client id="feedbackPrivateRestService" address="${ws.feedback.url}" serviceClass="fr.ge.feedback.ws.v1.service.IFeedbackPrivateRestService">
+        <jaxrs:providers>
+            <ref bean="jaxbJsonProvider" />
+        </jaxrs:providers>
+    </jaxrs:client>
 
 </beans>

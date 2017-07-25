@@ -38,7 +38,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>fr.ge.feedback</groupId>
+			<groupId>fr.ge.common.feedback</groupId>
 			<artifactId>ge-feedback-core</artifactId>
 		</dependency>
 		<dependency>
