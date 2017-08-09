@@ -34,6 +34,7 @@
 	<groupId>fr.ge.common.feedback</groupId>
 	<artifactId>ge-feedback</artifactId>
 	<packaging>pom</packaging>
+    <version>2.3.9.0-SNAPSHOT</version>
 
 	<name>GE Feedback</name>
 
