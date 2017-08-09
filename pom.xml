@@ -80,7 +80,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
 
-		<form-manager.version>3.3.0-SNAPSHOT</form-manager.version>
+		
 
 		<javadoc-plugin.version>2.10.3</javadoc-plugin.version>
 		<site-plugin.version>3.5</site-plugin.version>
@@ -131,7 +131,7 @@
 		<hamcrest.version>1.3</hamcrest.version>
 		<mockito.version>2.0.38-beta</mockito.version>
 		<dbunit.version>2.5.1</dbunit.version>
-		<i18n.version>2.3.6.0-SNAPSHOT</i18n.version>
+		<i18n.version>2.3.8.0</i18n.version>
 
 		<javassist.version>3.18.1-GA</javassist.version>
 
