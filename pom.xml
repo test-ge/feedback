@@ -728,57 +728,6 @@
 		</profile>
 	</profiles>
 
-
-	<repositories>
-
-		<repository>
-			<id>internal</id>
-			<name>GE Release Repository</name>
-			<url>http://svn.projet-ge.fr:8080/archiva/repository/internal/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>snapshots</id>
-			<name>GE Snapshot Repository</name>
-			<url>http://svn.projet-ge.fr:8080/archiva/repository/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>appstatus-repository</id>
-			<name>App Status repository</name>
-			<url>http://appstatus.sourceforge.net/maven2/repository</url>
-			<releases>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>appstatus-repository-snapshots</id>
-			<name>App Status repository</name>
-			<url>http://appstatus.sourceforge.net/maven2/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-			</snapshots>
-		</repository>
-
-	</repositories>
-
 	<modules>
 		<module>modules/ge-feedback-core</module>
 		<module>modules/ge-feedback-service</module>
