@@ -37,7 +37,7 @@
     <th:block th:replace="~{commons/layout/head}" />
 </head>
 <body>
-    <span class="ribbon" th:if="${@appProperties.environment}" th:text="${@appProperties.environment}">Environment</span>
+    <span class="ribbon" th:if="${!#strings.isEmpty(@appProperties.environment)}" th:text="${@appProperties.environment}">Environment</span>
 
     <div class="page-wrap">
         <nav class="navbar" role="navigation">
