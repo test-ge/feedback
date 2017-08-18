@@ -16,7 +16,7 @@
             <DefaultRolloverStrategy max="@log.max_index@" />
         </RollingFile>
 
-        <RollingFile name="func" fileName="@log.file.technical@" filePattern="@log.file.technical@-%d{MM-dd-yyyy}-%i.gz">
+        <RollingFile name="func" fileName="@log.file.functional@" filePattern="@log.file.functional@-%d{MM-dd-yyyy}-%i.gz">
             <PatternLayout pattern="[FUNC] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
             <Policies>
                 <TimeBasedTriggeringPolicy />
@@ -39,31 +39,31 @@
     <Loggers>
 
         <Logger name="org.springframework" level="@log.level_fwk@" additivity="false">
-            <AppenderRef ref="thirdParty" />
+            <AppenderRef ref="@log.appender.thirdParty@" />
         </Logger>
 
         <Logger name="org.thymeleaf" level="@log.level_fwk@" additivity="false">
-            <AppenderRef ref="thirdParty" />
+            <AppenderRef ref="@log.appender.thirdParty@" />
         </Logger>
 
         <Logger name="net.sf.appstatus" level="@log.level_fwk@" additivity="false">
-            <AppenderRef ref="thirdParty" />
+            <AppenderRef ref="@log.appender.thirdParty@" />
         </Logger>
 
         <Logger name="fr.ge" level="@log.level_app@" additivity="false">
-            <AppenderRef ref="func" />
+            <AppenderRef ref="@log.appender.func@" />
         </Logger>
 
         <Logger name="func" level="@log.level_app@" additivity="false">
-            <AppenderRef ref="func" />
+            <AppenderRef ref="@log.appender.func@" />
         </Logger>
 
         <Logger name="tech" level="@log.level_app@" additivity="false">
-            <AppenderRef ref="tech" />
+            <AppenderRef ref="@log.appender.tech@" />
         </Logger>
 
         <Root level="@log.level@">
-            <AppenderRef ref="console" />
+            <AppenderRef ref="@log.appender.root@" />
         </Root>
 
     </Loggers>

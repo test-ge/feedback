@@ -1,114 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright SCN Guichet Entreprises, Capgemini and contributors (2014-2016) 
-	This software is a computer program whose purpose is to maintain and administrate 
-	standalone forms. This software is governed by the CeCILL license under French 
-	law and abiding by the rules of distribution of free software. You can use, 
-	modify and/ or redistribute the software under the terms of the CeCILL license 
-	as circulated by CEA, CNRS and INRIA at the following URL "http://www.cecill.info". 
-	As a counterpart to the access to the source code and rights to copy, modify 
-	and redistribute granted by the license, users are provided only with a limited 
-	warranty and the software's author, the holder of the economic rights, and 
-	the successive licensors have only limited liability. In this respect, the 
-	user's attention is drawn to the risks associated with loading, using, modifying 
-	and/or developing or reproducing the software by the user in light of its 
-	specific status of free software, that may mean that it is complicated to 
-	manipulate, and that also therefore means that it is reserved for developers 
-	and experienced professionals having in-depth computer knowledge. Users are 
-	therefore encouraged to load and test the software's suitability as regards 
-	their requirements in conditions enabling the security of their systems and/or 
-	data to be ensured and, more generally, to use and operate it in the same 
-	conditions as regards security. The fact that you are presently reading this 
-	means that you have had knowledge of the CeCILL license and that you accept 
-	its terms. -->
+    This software is a computer program whose purpose is to maintain and administrate 
+    standalone forms. This software is governed by the CeCILL license under French 
+    law and abiding by the rules of distribution of free software. You can use, 
+    modify and/ or redistribute the software under the terms of the CeCILL license 
+    as circulated by CEA, CNRS and INRIA at the following URL "http://www.cecill.info". 
+    As a counterpart to the access to the source code and rights to copy, modify 
+    and redistribute granted by the license, users are provided only with a limited 
+    warranty and the software's author, the holder of the economic rights, and 
+    the successive licensors have only limited liability. In this respect, the 
+    user's attention is drawn to the risks associated with loading, using, modifying 
+    and/or developing or reproducing the software by the user in light of its 
+    specific status of free software, that may mean that it is complicated to 
+    manipulate, and that also therefore means that it is reserved for developers 
+    and experienced professionals having in-depth computer knowledge. Users are 
+    therefore encouraged to load and test the software's suitability as regards 
+    their requirements in conditions enabling the security of their systems and/or 
+    data to be ensured and, more generally, to use and operate it in the same 
+    conditions as regards security. The fact that you are presently reading this 
+    means that you have had knowledge of the CeCILL license and that you accept 
+    its terms. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>fr.ge.common.feedback</groupId>
-		<artifactId>ge-feedback-webservices</artifactId>
-		<version>2.3.9.0-SNAPSHOT</version>
-		<relativePath>../..</relativePath>
-	</parent>
+    <parent>
+        <groupId>fr.ge.common.feedback</groupId>
+        <artifactId>ge-feedback-webservices</artifactId>
+        <version>2.3.9.0-SNAPSHOT</version>
+        <relativePath>../..</relativePath>
+    </parent>
 
-	<artifactId>ge-feedback-ws-contract</artifactId>
+    <artifactId>ge-feedback-ws-contract</artifactId>
 
-	<name>GE feedback Web Services Contract</name>
+    <name>GE feedback Web Services Contract</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-		</dependency>
-		<dependency>
+    <dependencies>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+        </dependency>
+        <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-rs-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>fr.ge.common.feedback</groupId>
-			<artifactId>ge-feedback-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-service-description</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-	</dependencies>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>fr.ge.common.feedback</groupId>
+            <artifactId>ge-feedback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description</artifactId>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<action>
-										<execute>
-											<runOnIncremental />
-										</execute>
-									</action>
-									<pluginExecutionFilter>
-										<groupId>org.apache.cxf</groupId>
-										<artifactId>cxf-java2wadl-plugin</artifactId>
-										<versionRange>${cxf.version}</versionRange>
-										<goals>
-											<goal>parsejavadoc</goal>
-											<goal>java2wadl</goal>
-										</goals>
-									</pluginExecutionFilter>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		<plugins>
-			<!-- <plugin> <groupId>org.apache.cxf</groupId> <artifactId>cxf-java2wadl-plugin</artifactId> 
-				<executions> <execution> <id>cxf-parse-javadoc</id> <phase>process-classes</phase> 
-				<goals> <goal>parsejavadoc</goal> </goals> </execution> <execution> <id>cxf-generate-wadl</id> 
-				<phase>process-classes</phase> <goals> <goal>java2wadl</goal> </goals> <configuration> 
-				<classResourceNames> <classResourceName>fr.ge.markov.ws.v1.service.IIssueService</classResourceName> 
-				</classResourceNames> <docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider> 
-				<attachWadl>true</attachWadl> <outputFile>${project.build.directory}/generated-wadl/api.wadl</outputFile> 
-				<linkAnyMediaTypeToXmlSchema>true</linkAnyMediaTypeToXmlSchema> <namespacePrefix>ge</namespacePrefix> 
-				<incrementNamespacePrefix>false</incrementNamespacePrefix> </configuration> 
-				</execution> </executions> <dependencies> <dependency> <groupId>com.sun.xml.bind</groupId> 
-				<artifactId>jaxb-impl</artifactId> <version>2.2.11</version> </dependency> 
-				</dependencies> </plugin> -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental />
+                                        </execute>
+                                    </action>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.cxf</groupId>
+                                        <artifactId>cxf-java2wadl-plugin</artifactId>
+                                        <versionRange>${cxf.version}</versionRange>
+                                        <goals>
+                                            <goal>parsejavadoc</goal>
+                                            <goal>java2wadl</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
