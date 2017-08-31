@@ -4,7 +4,7 @@
     <Appenders>
 
         <Console name="console">
-            <PatternLayout pattern="[----] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <PatternLayout pattern="[----] %-5p %d{ISO8601} - %X{correlationId} - U:%X{userId} - R:%X{recordId} - %c - %m%n" />
         </Console>
 
     </Appenders>

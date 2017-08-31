@@ -31,7 +31,7 @@
  * knowledge of the CeCILL license and that you accept its terms.
  */
 
-package fr.ge.feedback.core.support.filter;
+package fr.ge.feedback.ws.support.filter;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -40,6 +40,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.MDC;
 import org.springframework.web.filter.GenericFilterBean;
@@ -50,7 +51,7 @@ import org.springframework.web.filter.GenericFilterBean;
  *
  * @author Christian Cougourdan
  */
-public class LogContextFilter extends GenericFilterBean {
+public class LogContextWsFilter extends GenericFilterBean {
 
     /**
      * {@inheritDoc}
@@ -58,9 +59,18 @@ public class LogContextFilter extends GenericFilterBean {
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
         try {
-            MDC.put("correlationId", UUID.randomUUID().toString());
-            // MDC.put("userId",
-            // Optional.ofNullable(AccountContext.currentUser()).map(LocalUserBean::getId).orElse(null));
+            String correlationId = null;
+            String userId = null;
+            if (request instanceof HttpServletRequest) {
+                final HttpServletRequest httpRequest = (HttpServletRequest) request;
+                correlationId = httpRequest.getHeader("X-Correlation-ID");
+                userId = httpRequest.getHeader("X-User-ID");
+            }
+            if (correlationId == null) {
+                correlationId = UUID.randomUUID().toString();
+            }
+            MDC.put("correlationId", correlationId);
+            MDC.put("userId", userId);
             chain.doFilter(request, response);
         } finally {
             MDC.clear();

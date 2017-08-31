@@ -46,5 +46,6 @@
     <import resource="appstatus-context.xml" />
     <import resource="ws-server-cxf-context.xml" />
     <import resource="classpath:spring/persistence-context.xml" />
+    <import resource="classpath:spring/log-filter-ws-context.xml" />
 
 </beans>

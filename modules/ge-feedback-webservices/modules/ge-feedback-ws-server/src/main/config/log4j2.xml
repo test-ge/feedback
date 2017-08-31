@@ -4,11 +4,11 @@
     <Appenders>
 
         <Console name="console">
-            <PatternLayout pattern="[----] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <PatternLayout pattern="[----] %-5p %d{ISO8601} - %X{correlationId} - U:%X{userId} - R:%X{recordId} - %c - %m%n" />
         </Console>
 
         <RollingFile name="tech" fileName="@log.file.technical@" filePattern="@log.file.technical@-%d{MM-dd-yyyy}-%i.gz">
-            <PatternLayout pattern="[TECH] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <PatternLayout pattern="[TECH] %-5p %d{ISO8601} - %X{correlationId} - U:%X{userId} - R:%X{recordId} - %c - %m%n" />
             <Policies>
                 <TimeBasedTriggeringPolicy />
                 <SizeBasedTriggeringPolicy size="@log.max_size@" />
@@ -17,7 +17,7 @@
         </RollingFile>
 
         <RollingFile name="func" fileName="@log.file.functional@" filePattern="@log.file.functional@-%d{MM-dd-yyyy}-%i.gz">
-            <PatternLayout pattern="[FUNC] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <PatternLayout pattern="[FUNC] %-5p %d{ISO8601} - %X{correlationId} - U:%X{userId} - R:%X{recordId} - %c - %m%n" />
             <Policies>
                 <TimeBasedTriggeringPolicy />
                 <SizeBasedTriggeringPolicy size="@log.max_size@" />
@@ -26,7 +26,7 @@
         </RollingFile>
 
         <RollingFile name="thirdParty" fileName="@log.file.thirdParty@" filePattern="@log.file.thirdParty@-%d{MM-dd-yyyy}-%i.gz">
-            <PatternLayout pattern="[LIBS] %-5p %d{ISO8601} - %X{correlationId} - %X{userId} - %c{1.} - %m%n" />
+            <PatternLayout pattern="[LIBS] %-5p %d{ISO8601} - %X{correlationId} - U:%X{userId} - R:%X{recordId} - %c - %m%n" />
             <Policies>
                 <TimeBasedTriggeringPolicy />
                 <SizeBasedTriggeringPolicy size="@log.max_size@" />

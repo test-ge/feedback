@@ -33,9 +33,26 @@
     knowledge of the CeCILL license and that you accept its terms.
 
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="slf4jContextFilter" class="fr.ge.feedback.core.support.filter.LogContextFilter" />
+    <bean id="slf4jContextFilter" class="fr.ge.feedback.ws.support.filter.LogContextWsFilter" />
+
+    <bean id="wsLoggingAspect" class="fr.ge.feedback.core.support.aop.MethodCallLoggingAspect">
+        <property name="logLevel" value="INFO" />
+    </bean>
+
+    <bean id="serviceLoggingAspect" class="fr.ge.feedback.core.support.aop.MethodCallLoggingAspect">
+        <property name="logLevel" value="DEBUG" />
+    </bean>
+
+    <aop:config proxy-target-class="false">
+        <aop:advisor advice-ref="wsLoggingAspect" pointcut="execution(public * fr.ge..ws..service.impl..*.*(..))" />
+    </aop:config>
+
+    <aop:config proxy-target-class="false">
+        <aop:advisor advice-ref="serviceLoggingAspect" pointcut="execution(public * fr.ge..service.impl..*.*(..)) and !execution(public * fr.ge..ws..service.impl..*.*(..))" />
+    </aop:config>
 
 </beans>
