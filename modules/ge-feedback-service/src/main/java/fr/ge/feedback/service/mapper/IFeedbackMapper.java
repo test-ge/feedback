@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import fr.ge.feedback.core.bean.search.SearchQueryOrder;
 import fr.ge.feedback.service.bean.FeedbackBean;
 
 /**
@@ -72,9 +73,11 @@ public interface IFeedbackMapper {
      *            filters
      * @param rowBounds
      *            pagination
-     * @return queue messages list
+     * @param orders
+     *            orders
+     * @return feedback messages list
      */
-    List<FeedbackBean> findAll(@Param("filters") Map<String, Object> filters, RowBounds rowBounds);
+    List<FeedbackBean> findAll(@Param("filters") Map<String, Object> filters, @Param("orders") List<SearchQueryOrder> orders, RowBounds rowBounds);
 
     /**
      * Count queue messages.

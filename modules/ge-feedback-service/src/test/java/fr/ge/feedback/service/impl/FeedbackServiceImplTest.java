@@ -7,9 +7,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +22,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.ge.feedback.core.bean.search.SearchQuery;
+import fr.ge.feedback.core.bean.search.SearchQueryFilter;
+import fr.ge.feedback.core.bean.search.SearchQueryOrder;
 import fr.ge.feedback.core.bean.search.SearchResult;
 import fr.ge.feedback.service.IFeedbackService;
 import fr.ge.feedback.service.bean.FeedbackBean;
@@ -116,6 +121,47 @@ public class FeedbackServiceImplTest extends AbstractDbTest {
                         hasProperty("maxResults", equalTo(5L)), //
                         hasProperty("totalResults", equalTo(2L))) //
         );
+    }
+
+    @Test
+    public void testSearchOrders() {
+        List<SearchQueryOrder> orders = new ArrayList<>();
+        orders.add(new SearchQueryOrder("rate", "asc"));
+        SearchQuery search = new SearchQuery(0, 5L);
+        search.setOrders(orders);
+
+        final SearchResult<FeedbackBean> actual = this.service.search(search, FeedbackBean.class);
+
+        assertThat(actual.getContent().get(0), //
+                allOf( //
+                        hasProperty("rate", equalTo(1L)), //
+                        hasProperty("page", equalTo("auth.dev.guichet-entreprises.fr/form-forge/search")), //
+                        hasProperty("comment", equalTo("the worst page")) //
+                ));
+    }
+
+    @Test
+    public void testSearchFiltersAndOrders() {
+        List<SearchQueryOrder> orders = new ArrayList<>();
+        List<SearchQueryFilter> filters = new ArrayList<>();
+        orders.add(new SearchQueryOrder("rate", "asc"));
+        SearchQuery search = new SearchQuery(0, 5L);
+        search.setOrders(orders);
+        SearchQueryFilter filter = new SearchQueryFilter("rate", ">", "1");
+        SearchQueryFilter filter1 = new SearchQueryFilter("comment", "%", "the best");
+        filters.add(filter);
+        filters.add(filter1);
+        search.setFilters(filters);
+
+        final SearchResult<FeedbackBean> actual = this.service.search(search, FeedbackBean.class);
+
+        assertEquals(actual.getContent().size(), 1);
+        assertThat(actual.getContent().get(0), //
+                allOf( //
+                        hasProperty("rate", equalTo(5L)), //
+                        hasProperty("page", equalTo("auth.dev.guichet-entreprises.fr/form-forge/markov/monitoring")), //
+                        hasProperty("comment", equalTo("the best page")) //
+                ));
     }
 
 }

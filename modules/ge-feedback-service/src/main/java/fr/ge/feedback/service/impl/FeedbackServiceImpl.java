@@ -3,6 +3,7 @@
  */
 package fr.ge.feedback.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.ge.feedback.core.bean.search.SearchQuery;
+import fr.ge.feedback.core.bean.search.SearchQueryOrder;
 import fr.ge.feedback.core.bean.search.SearchResult;
 import fr.ge.feedback.service.IFeedbackService;
 import fr.ge.feedback.service.bean.FeedbackBean;
@@ -89,12 +91,17 @@ public class FeedbackServiceImpl implements IFeedbackService {
     @Override
     public <R> SearchResult<R> search(SearchQuery searchQuery, Class<R> expectedClass) {
         final Map<String, Object> filters = new HashMap<>();
+        final List<SearchQueryOrder> orders = new ArrayList<>();
         if (null != searchQuery.getFilters()) {
             searchQuery.getFilters().forEach(filter -> filters.put(filter.getColumn(), filter));
         }
 
+        if (null != searchQuery.getOrders()) {
+            searchQuery.getOrders().forEach(order -> orders.add(new SearchQueryOrder(order.getColumn(), order.getOrder())));
+        }
+
         final RowBounds rowBounds = new RowBounds((int) searchQuery.getStartIndex(), (int) searchQuery.getMaxResults());
-        final List<FeedbackBean> entities = this.feedbackMapper.findAll(filters, rowBounds);
+        final List<FeedbackBean> entities = this.feedbackMapper.findAll(filters, orders, rowBounds);
 
         final SearchResult<R> searchResult = new SearchResult<>(searchQuery.getStartIndex(), searchQuery.getMaxResults());
         if (null != entities) {
