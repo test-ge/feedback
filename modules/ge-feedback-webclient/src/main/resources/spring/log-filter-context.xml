@@ -33,21 +33,18 @@
     knowledge of the CeCILL license and that you accept its terms.
 
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:cxf="http://cxf.apache.org/core" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-                        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-                        http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <bean id="slf4jContextFilter" class="fr.ge.feedback.webclient.support.filter.LogContextFilter" />
 
-    <util:properties id="appProperties" location="classpath:test.properties" />
-    <context:property-placeholder properties-ref="appProperties" />
+    <bean id="controllerLoggingAspect" class="fr.ge.feedback.core.support.aop.MethodCallLoggingAspect">
+        <property name="logLevel" value="INFO" />
+    </bean>
 
-    <context:annotation-config />
-
-    <bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper"/>
+    <aop:config proxy-target-class="false">
+        <aop:advisor advice-ref="controllerLoggingAspect" pointcut="execution(public * fr.ge..controller..*.*(..))" />
+    </aop:config>
 
 </beans>

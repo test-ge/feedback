@@ -32,14 +32,18 @@
         </constructor-arg>
     </bean>
 
+    <bean id="logPreserveFilter" class="fr.ge.feedback.ws.support.filter.LogPreserveFilter" />
+
     <jaxrs:client id="feedbackRestService" address="${ws.feedback.url}" serviceClass="fr.ge.feedback.ws.v1.service.IFeedbackRestService">
         <jaxrs:providers>
+            <ref bean="logPreserveFilter" />
             <ref bean="jaxbJsonProvider" />
         </jaxrs:providers>
     </jaxrs:client>
     
     <jaxrs:client id="feedbackPrivateRestService" address="${ws.feedback.url}" serviceClass="fr.ge.feedback.ws.v1.service.IFeedbackPrivateRestService">
         <jaxrs:providers>
+            <ref bean="logPreserveFilter" />
             <ref bean="jaxbJsonProvider" />
         </jaxrs:providers>
     </jaxrs:client>
