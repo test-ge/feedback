@@ -34,7 +34,7 @@
     <groupId>fr.ge.common.feedback</groupId>
     <artifactId>ge-feedback</artifactId>
     <packaging>pom</packaging>
-    <version>2.3.9.1</version>
+    <version>2.3.9.2-SNAPSHOT</version>
 
     <name>GE Feedback</name>
 
@@ -42,7 +42,7 @@
         <connection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback.git</connection>
         <developerConnection>scm:git:https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback.git</developerConnection>
         <url>https://tools.projet-ge.fr/gitlab/minecraft/ge-feedback</url>
-        <tag>ge-feedback-2.3.9.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>
