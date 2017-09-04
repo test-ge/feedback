@@ -27,7 +27,7 @@
     <parent>
         <groupId>fr.ge.common.feedback</groupId>
         <artifactId>ge-feedback-webservices</artifactId>
-        <version>2.4.1.0-SNAPSHOT</version>
+       <version>2.3.9.1-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
