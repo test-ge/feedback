@@ -202,7 +202,8 @@
     <modules>
         <module>modules/ge-feedback-core</module>
         <module>modules/ge-feedback-service</module>
-        <module>modules/ge-feedback-webservices</module>
+        <module>modules/ge-feedback-webservices/modules/ge-feedback-ws-contract</module>
+        <module>modules/ge-feedback-webservices/modules/ge-feedback-ws-server</module>
         <module>modules/ge-feedback-webclient</module>
     </modules>
 
