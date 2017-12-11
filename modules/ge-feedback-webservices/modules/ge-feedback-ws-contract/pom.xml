@@ -26,9 +26,9 @@
 
     <parent>
         <groupId>fr.ge.common.feedback</groupId>
-        <artifactId>ge-feedback-webservices</artifactId>
+        <artifactId>ge-feedback</artifactId>
         <version>2.3.9.2-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>../../../..</relativePath>
     </parent>
 
     <artifactId>ge-feedback-ws-contract</artifactId>
