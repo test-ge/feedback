@@ -6,25 +6,21 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "grunt",
-    "watch": "grunt && grunt watch"
+    "dist": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "jquery": "~3.2.1",
     "jquery-bar-rating": "~1.2.2"
   },
   "devDependencies": {
-    "async": "~2.5.0",
-    "chalk": "~2.0.1",
-    "grunt": "~1.0.1",
-    "grunt-browserify": "~5.0.0",
-    "grunt-cli": "~1.2.0",
-    "grunt-contrib-copy": "~1.0.0",
-    "grunt-contrib-less": "~1.4.1",
-    "grunt-contrib-uglify": "~3.0.1",
-    "grunt-contrib-watch": "~1.0.0",
-    "load-grunt-tasks": "~3.5.2",
-    "mime-types": "~2.1.15",
-    "through": "~2.3.8"
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "less": "^3.8.0",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0"
   }
 }

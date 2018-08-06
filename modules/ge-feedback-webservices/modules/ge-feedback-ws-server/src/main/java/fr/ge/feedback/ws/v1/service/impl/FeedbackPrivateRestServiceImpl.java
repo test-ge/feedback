@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fr.ge.feedback.ws.v1.service.impl;
 

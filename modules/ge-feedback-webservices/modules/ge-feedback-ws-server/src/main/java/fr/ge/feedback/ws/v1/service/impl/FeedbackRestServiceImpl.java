@@ -101,8 +101,9 @@ public class FeedbackRestServiceImpl implements IFeedbackRestService {
     }
 
     private String getWidgetFromCache() {
+        this.widgetScriptResource = null;
         if (null == this.widgetScriptResource) {
-            try (final InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("public/js/widget-min.js")) {
+            try (final InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("public/js/widget.js")) {
                 final String script = new String(IOUtils.toByteArray(in), StandardCharsets.UTF_8);
                 this.widgetScriptResource = CoreUtil.searchAndReplace(script, PLACEHOLDER_PATTERN, m -> {
                     final String key = m.group(1);

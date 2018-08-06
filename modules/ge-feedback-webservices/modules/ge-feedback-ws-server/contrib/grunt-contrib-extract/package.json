@@ -1,0 +1,26 @@
+{
+    "name": "grunt-contrib-extract",
+    "version": "1.0.0",
+    "description": "...",
+    "author": "Christian Cougourdan",
+    "license": "ISC",
+    "main": "tasks/extract.js",
+    "files": "tasks",
+    "private": false,
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://tools.projet-ge.fr/gitlab/tools/grunt-contrib-extract.git"
+    },
+    "publishConfig": {
+        "registry": "https://tools.projet-ge.fr/nexus/content/repositories/js/"
+    },
+    "dependencies": {
+        "async": "^2.6.0",
+        "chalk": "^2.3.0"
+    },
+    "devDependencies": {
+    }
+}

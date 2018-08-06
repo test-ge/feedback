@@ -34,7 +34,7 @@
     <groupId>fr.ge.common.feedback</groupId>
     <artifactId>ge-feedback</artifactId>
     <packaging>pom</packaging>
-    <version>2.3.9.2-SNAPSHOT</version>
+    <version>=2.7.8.0-SNAPSHOT</version>
 
     <name>GE Feedback</name>
 
@@ -179,8 +179,8 @@
                 <slack.baseUrl>https://hooks.slack.com/services/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</slack.baseUrl>
                 <directory.baseUrl>http://forms-admin.dev.guichet-partenaires.fr:8081/ge-directory-ws-server/api</directory.baseUrl>
 
-                <ws.feedback.url>http://localhost:10080/ge-feedback-ws-server/api</ws.feedback.url>
-                <ws.feedback.public.url>http://localhost:10080/ge-feedback-ws-server/api</ws.feedback.public.url>
+                <ws.feedback.url>http://localhost:9080/ge-feedback-ws-server/api</ws.feedback.url>
+                <ws.feedback.public.url>http://localhost:9080/ge-feedback-ws-server/api</ws.feedback.public.url>
 
                 <log.file.technical>${project.build.directory}/logs/tech.log</log.file.technical>
                 <log.file.functional>${project.build.directory}/logs/func.log</log.file.functional>
