@@ -1,10 +1,10 @@
 'use strict';
 
-var path = require('path');
-var async = require('async');
-var chalk = require('chalk');
-
 module.exports = function (grunt) {
+
+    var path = require('path');
+    var async = require('async');
+    var chalk = require('chalk');
 
     grunt.registerMultiTask('extract', 'Extract urls from CSS files', function() {
         var done = this.async();
@@ -29,8 +29,13 @@ module.exports = function (grunt) {
 
             while ((m = searchPattern.exec(buffer))) {
                 var url = m[1].replace(cleanningPattern, '$2');
-                grunt.file.copy(path.resolve(srcBasePath, url), path.resolve(dstBasePath, url));
-                cnt += 1;
+                if (!url.startsWith('data:')) {
+                    var srcPath = path.resolve(srcBasePath, url);
+                    if (grunt.file.exists(srcPath)) {
+                        grunt.file.copy(srcPath, path.resolve(dstBasePath, url));
+                    }
+                    cnt += 1;
+                }
             }
 
             return next();
