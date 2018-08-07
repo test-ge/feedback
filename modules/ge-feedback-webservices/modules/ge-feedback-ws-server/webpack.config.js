@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 var project = {
@@ -39,6 +40,13 @@ module.exports = {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [ 'url-loader' ]
             }
+        ]
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                extractComments: true
+            })
         ]
     }
 };
